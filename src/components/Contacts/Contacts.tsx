@@ -48,7 +48,7 @@ function Contacts() {
                 rel="noreferrer"
                 >
                 <FaTelegramPlane />
-                Telegram
+                &nbsp;Telegram
                 </a>
                 <a
                 className="contact-link whatsapp-link"
@@ -57,7 +57,7 @@ function Contacts() {
                 rel="noreferrer"
               >
                 <FaWhatsapp />
-                WhatsApp
+                &nbsp;WhatsApp
               </a>
                 </div>
             <div className="contact-card">

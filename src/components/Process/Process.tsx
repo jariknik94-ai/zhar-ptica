@@ -6,7 +6,7 @@ function Process() {
     <section className='process'>
       <div className='container'>
 
-        <h2>Как проходит работа</h2>
+        <h2>Этапы процесса реставрации</h2>
 
         <div className='steps'>
 

@@ -68,6 +68,7 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
       'advantages',
       'process',
       'reviews',
+      'price',
       'contacts',
     ]
 
@@ -157,6 +158,13 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
                 onClick={() => goToSection('reviews')}
               >
                 Отзывы
+              </a>
+
+              <a
+                className={active === 'price' ? 'active-link' : ''}
+                onClick={() => goToSection('price')}
+              >
+                Прайс
               </a>
 
               <a

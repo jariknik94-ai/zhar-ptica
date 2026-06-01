@@ -46,9 +46,15 @@ function Home() {
         <Reviews />
       </section>
 
-      {/* CTA / CONTACTS */}
+      {/* CTA */}
+      <section id="price">
+        <CTA />
+      </section>
+      
+
+      {/* CONTACTS */}
       <section id="contacts">
-        {<CTA /> }<Contacts />
+        <Contacts />
       </section>
 
       {/* FLOATING UI */}
