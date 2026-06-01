@@ -2,7 +2,7 @@ name: Deploy to VPS
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   deploy:
@@ -18,14 +18,19 @@ jobs:
           script: |
             set -e
 
-            echo "📦 Pulling latest changes..."
+            echo "📦 Syncing repository..."
             cd /var/www/zhar-ptica
-            git pull origin main
+
+            git fetch origin main
+            git reset --hard origin/main
 
             echo "📦 Installing dependencies..."
-            npm ci
+            npm ci --prefer-offline --no-audit
+
+            echo "🧹 Cleaning old build..."
+            rm -rf dist
 
             echo "🏗 Building project..."
             npm run build
 
-            echo "✅ Deployment finished"
+            echo "🚀 Deployment finished successfully"
