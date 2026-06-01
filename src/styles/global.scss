@@ -105,6 +105,20 @@
   --s-6: 48px;
   --s-7: 64px;
 }
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+#root {
+  overflow-x: hidden;
+}
+
+section, header, div {
+  max-width: 100%;
+}
+
 /* Плавный скролл по странице */
 html {
   scroll-behavior: smooth;
@@ -122,8 +136,6 @@ body {
   font-family: 'TT Wellingtons';
   background: #07111f;
   color: white;
-  overflow-x: hidden;
-  overflow-x: hidden;
 }
 
 /* Премиальные шрифты для заголовков */
