@@ -123,6 +123,7 @@ body {
   background: #07111f;
   color: white;
   overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 /* Премиальные шрифты для заголовков */
@@ -133,6 +134,7 @@ h1, h2, h3 {
 
 h1 {
   font-weight: 450;
+  padding-top: 25px;
 }
 
 h2 {
@@ -336,24 +338,66 @@ nav a:hover {
 }
 
 /*  RESPONSIVE  */
-@media (max-width: 992px) {
-  .hero h1 {
-    font-size: 58px;
+// @media (min-width: 1600px) {
+//   .navbar .container {
+//     max-width: 1500px;
+//   }
+
+//   .nav {
+//     gap: 42px;
+//   }
+
+//   .logo {
+//     font-size: 34px;
+//   }
+// }
+
+@media (min-width: 993px) {
+
+  /* контейнер остаётся ограниченным */
+  .navbar .container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
   }
 
-  h2 {
-    font-size: 42px;
+  /* главный flex-контейнер */
+  .navbar-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ВАЖНО: разносит по краям */
+  }
+
+  /* логотип не сжимается */
+  .logo {
+    flex-shrink: 0;
+  }
+
+  /* меню уходит вправо */
+  .nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    flex-shrink: 0;
   }
 }
 
 @media (max-width: 768px) {
   .navbar-content {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     gap: 20px;
+    
   }
 
   .hero {
-    padding-top: 120px;
+    padding-top: 150px;
     padding-bottom: 100px;
   }
 

@@ -1,5 +1,6 @@
 import Reveal from '../Reveal/Reveal'
 import { FaTelegramPlane } from "react-icons/fa"
+import { FaWhatsapp } from 'react-icons/fa'
 
 import './Contacts.scss'
 
@@ -49,6 +50,15 @@ function Contacts() {
                 <FaTelegramPlane />
                 Telegram
                 </a>
+                <a
+                className="contact-link whatsapp-link"
+                href="https://wa.me/79039510157"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaWhatsapp />
+                WhatsApp
+              </a>
                 </div>
             <div className="contact-card">
               <span>🕒 График работы</span>

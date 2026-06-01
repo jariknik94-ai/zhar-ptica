@@ -98,6 +98,14 @@
   color: #2AABEE;
 }
 
+.contact-link.whatsapp-link svg {
+  color: #25D366 !important;
+}
+
+.contact-link.whatsapp-link:hover {
+  text-shadow: 0 0 18px rgba(37, 211, 102, 0.35);
+}
+
 /*  RESPONSIVE  */
 
 @media (max-width: 992px) {
