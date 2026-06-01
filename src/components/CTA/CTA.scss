@@ -1,0 +1,146 @@
+.cta {
+  padding: 130px 0;
+
+  text-align: center;
+}
+
+/* текст */
+.cta p {
+  max-width: 760px;
+
+  margin: 24px auto 40px;
+
+  font-size: 20px;
+  line-height: 1.8;
+
+  color: rgba(255,255,255,0.75);
+}
+
+/* КНОПКА ПРАЙС */
+
+.cta-buttons {
+  margin-top: 40px;
+}
+
+.cta-price-btn {
+  border: none;
+  cursor: pointer;
+
+  font-size: 17px;
+  border-radius: 18px;
+  padding: 18px 38px;
+
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(
+    135deg,
+    #f59e0b,
+    #f97316
+  );
+
+  color: white;
+
+  box-shadow:
+    0 10px 30px rgba(249,115,22,0.3);
+
+  transition: 0.4s;
+}
+
+/* shine эффект */
+
+.cta-price-btn::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    transparent
+  );
+
+  transition: 0.6s;
+}
+
+.cta-price-btn:hover::after {
+  left: 100%;
+}
+
+/* hover */
+
+.cta-price-btn:hover {
+  transform: translateY(-5px) scale(1.02);
+
+  box-shadow:
+    0 18px 45px rgba(249,115,22,0.45);
+}
+
+/* active */
+
+.cta-price-btn:active {
+  transform: scale(0.96);
+}
+
+/* ===== СТАРАЯ КНОПКА (если используется где-то ещё) ===== */
+
+.primary-btn {
+  display: inline-block;
+
+  padding: 18px 38px;
+
+  border-radius: 18px;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  color: white;
+
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+
+  box-shadow: 0 10px 30px rgba(249,115,22,0.3);
+
+  transition: 0.4s;
+
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  transform: translateY(-5px) scale(1.02);
+
+  box-shadow: 0 18px 45px rgba(249,115,22,0.45);
+}
+
+.primary-btn:active {
+  transform: scale(0.96);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .cta {
+    padding: 90px 0;
+  }
+
+  .cta p {
+    font-size: 18px;
+  }
+
+  .cta-price-btn {
+    width: 100%;
+  }
+
+  .primary-btn {
+    width: 100%;
+  }
+}

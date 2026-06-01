@@ -1,0 +1,203 @@
+.before-after {
+  padding: 130px 0;
+
+  text-align: center;
+}
+
+/* subtitle */
+.subtitle {
+  margin-top: 15px;
+  margin-bottom: 50px;
+
+  color: rgba(255,255,255,0.65);
+}
+
+/* wrapper */
+.ba-wrapper {
+  position: relative;
+
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* images */
+.ba-image {
+  width: 100%;
+  height: 500px;
+
+  object-fit: cover;
+
+  display: block;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+/* overlay */
+.ba-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  transition: clip-path 0.05s linear;
+}
+
+/* divider */
+.ba-divider {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  background: rgba(255,255,255,0.9);
+
+  transform: translateX(-50%);
+
+  z-index: 5;
+
+  box-shadow:
+    0 0 20px rgba(255,255,255,0.35),
+    0 0 40px rgba(245,158,11,0.25);
+}
+
+/* handle */
+.ba-handle {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #f59e0b,
+    #f97316
+  );
+
+  border: 3px solid white;
+
+  box-shadow:
+    0 0 20px rgba(245,158,11,0.45),
+    0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* invisible slider */
+.ba-slider {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+
+  cursor: ew-resize;
+
+  z-index: 10;
+}
+
+/* labels */
+.label {
+  position: absolute;
+
+  top: 20px;
+
+  padding: 6px 14px;
+
+  font-size: 14px;
+
+  background: rgba(0,0,0,0.4);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  border-radius: 10px;
+
+  z-index: 6;
+}
+
+.label.before {
+  left: 20px;
+}
+
+.label.after {
+  right: 20px;
+}
+
+/*  RESPONSIVE  */
+
+@media (max-width: 992px) {
+
+  .ba-image {
+    height: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .before-after {
+    padding: 90px 0;
+  }
+
+  .ba-wrapper {
+    border-radius: 22px;
+  }
+
+  .ba-image {
+    height: 340px;
+  }
+
+  .label {
+    font-size: 12px;
+
+    padding: 5px 10px;
+  }
+
+  .ba-handle {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .ba-image {
+    height: 260px;
+  }
+
+  .label {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .label.before {
+    left: 12px;
+  }
+
+  .label.after {
+    right: 12px;
+  }
+
+  .ba-handle {
+    width: 30px;
+    height: 30px;
+  }
+}

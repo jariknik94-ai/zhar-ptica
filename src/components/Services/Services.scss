@@ -1,0 +1,98 @@
+.services {
+  padding: 130px 0;
+}
+
+.services-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* карточка услуги */
+.service-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+
+  padding: 35px;
+
+  transition: 0.45s ease;
+  will-change: transform;
+}
+
+/* hover эффект */
+.service-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(249,115,22,0.25);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+}
+
+/* иконка */
+.icon {
+  font-size: 48px;
+  margin-bottom: 25px;
+  color: #f59e0b;
+}
+
+/* заголовок */
+.service-card h3 {
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+/* текст */
+.service-card p {
+  color: rgba(255,255,255,0.72);
+  line-height: 1.8;
+}
+
+/*  RESPONSIVE  */
+
+@media (max-width: 768px) {
+  .services {
+    padding: 90px 0;
+  }
+
+  .service-card {
+    padding: 28px;
+  }
+}
+/*  RESPONSIVE CARDS  */
+
+@media (max-width: 992px) {
+
+  .services-grid{
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+  }
+}
+
+@media (max-width: 768px) {
+
+  .services-grid{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .service-card{
+    padding: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .service-card{
+    padding: 22px;
+    border-radius: 22px;
+  }
+
+  .service-card h3 {
+    font-size: 22px;
+  }
+}

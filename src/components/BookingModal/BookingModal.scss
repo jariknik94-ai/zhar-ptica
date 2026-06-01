@@ -1,0 +1,145 @@
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0,0,0,0.6);
+
+  backdrop-filter: blur(12px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+/* modal */
+.modal {
+  width: 90%;
+  max-width: 500px;
+
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  border-radius: 24px;
+
+  padding: 40px;
+
+  position: relative;
+
+  animation: pop 0.3s ease;
+}
+
+/* animation */
+@keyframes pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* title */
+.modal h2 {
+  margin-bottom: 10px;
+
+  font-size: 34px;
+}
+
+/* text */
+.modal p {
+  margin-bottom: 25px;
+
+  color: rgba(255,255,255,0.7);
+}
+
+/* form */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+/* inputs */
+.modal-form input,
+.modal-form textarea {
+  padding: 14px 16px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  background: rgba(0,0,0,0.3);
+
+  color: white;
+
+  outline: none;
+}
+
+/* textarea */
+.modal-form textarea {
+  min-height: 100px;
+
+  resize: none;
+}
+
+/* submit */
+.modal-form button {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+
+  color: white;
+}
+
+/* close */
+.close-btn {
+  position: absolute;
+
+  top: 5px;
+  right: -125px;
+
+  background: transparent;
+
+  border: none;
+
+  color: white;
+
+  font-size: 10px;
+
+  cursor: pointer;
+
+  opacity: 0.7;
+
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  opacity: 1;
+
+  transform: scale(1.1);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .modal {
+    padding: 28px;
+  }
+
+  .modal h2 {
+    font-size: 28px;
+  }
+
+  .modal-form input,
+  .modal-form textarea {
+    font-size: 16px;
+  }
+}
