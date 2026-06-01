@@ -52,7 +52,7 @@ function Contacts() {
                 </a>
                 <a
                 className="contact-link whatsapp-link"
-                href="https://wa.me/79039510157"
+                href="https://wa.me/79039410157"
                 target="_blank"
                 rel="noreferrer"
               >
