@@ -34,7 +34,7 @@ function BeforeAfter() {
               src={After}
               alt='after'
               className='ba-image'
-              loading="lazy"
+              loading="eager"
               decoding="async"
             />
 

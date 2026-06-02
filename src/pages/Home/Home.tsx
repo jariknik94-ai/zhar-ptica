@@ -6,13 +6,14 @@ import CTA from "../../components/CTA/CTA";
 import Footer from "../../components/Footer/Footer";
 import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
 import Contacts from "../../components/Contacts/Contacts";
+import React from "react";
 
 // LAZY LOADED SECTIONS
 const Services = lazy(() => import("../../components/Services/Services"));
 const Advantages = lazy(() => import("../../components/Advantages/Advantages"));
-const Process = lazy(() => import("../../components/Process/Process"));
-const Reviews = lazy(() => import("../../components/Reviews/Reviews"));
-const BeforeAfter = lazy(() => import("../../components/BeforeAfter/BeforeAfter"));
+const Reviews = React.lazy(() => import('../../components/Reviews/Reviews'))
+const Process = React.lazy(() => import('../../components/Process/Process'))
+const BeforeAfter = React.lazy(() => import('../../components/BeforeAfter/BeforeAfter'))
 
 function Home() {
   return (
