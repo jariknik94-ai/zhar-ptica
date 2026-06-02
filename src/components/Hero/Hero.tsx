@@ -8,74 +8,65 @@ function Hero() {
   const [open, setOpen] = useState(false)
   const [offset, setOffset] = useState(0)
 
-  const [ready, setReady] = useState(false)
 
-  useEffect(() => {
-    // 👉 даём браузеру сначала отрисовать LCP
-    const t = requestAnimationFrame(() => {
-      setReady(true)
-    })
+useEffect(() => {
+  let ticking = false
+  let latestValue = 0
 
-    return () => cancelAnimationFrame(t)
-  }, [])
+  const handleScroll = () => {
+    latestValue = window.scrollY * 0.3
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setOffset(window.scrollY * 0.3)
+    if (!ticking) {
+      ticking = true
+
+      window.requestAnimationFrame(() => {
+        setOffset(latestValue)
+        ticking = false
+      })
     }
+  }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  window.addEventListener('scroll', handleScroll, { passive: true })
+
+  return () => window.removeEventListener('scroll', handleScroll)
+}, [])
 
   return (
     <section className='hero'>
 
+      {/* Parallax background (GPU-friendly) */}
       <div
         className='hero-light'
-        style={{ transform: `translateY(${offset}px)` }}
+        style={{
+          transform: `translate3d(0, ${offset}px, 0)`,
+          willChange: 'transform'
+        }}
       />
 
-      {/* LCP контент ВСЕГДА сразу */}
       <div className='container hero-content'>
 
-        {/* АНИМАЦИЯ НЕ УБРАНА — но теперь не блокирует LCP */}
-        {ready ? (
-          <>
-            <Reveal direction='up'>
-              <motion.h1
-                initial={{ opacity: 0, y: 80 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-              >
-                Премиальная реставрация
-                пухоперьевых изделий
-              </motion.h1>
-            </Reveal>
+        {/* TITLE */}
+        <Reveal direction='up'>
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: 'easeOut' }}
+          >
+            Премиальная реставрация
+            пухоперьевых изделий
+          </motion.h1>
+        </Reveal>
 
-            <Reveal direction='up' delay={0.2}>
-              <motion.p
-                initial={{ opacity: 0, y: 60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                Ателье «Жар птица» — возвращаем комфорт, мягкость и свежесть вашим изделиям с 2011 года
-              </motion.p>
-            </Reveal>
-          </>
-        ) : (
-          // 👉 fallback для LCP (очень важно)
-          <>
-            <h1>
-              Премиальная реставрация
-              пухоперьевых изделий
-            </h1>
-
-            <p>
-              Ателье «Жар птица» — возвращаем комфорт, мягкость и свежесть вашим изделиям с 2011 года
-            </p>
-          </>
-        )}
+        {/* TEXT */}
+        <Reveal direction='up' delay={0.2}>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Ателье «Жар птица» — возвращаем комфорт, мягкость и свежесть вашим изделиям с 2011 года
+          </motion.p>
+        </Reveal>
 
       </div>
 
