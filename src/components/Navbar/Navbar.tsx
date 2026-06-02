@@ -160,12 +160,12 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
                 Отзывы
               </a>
 
-              <a
+              {/* <a
                 className={active === 'price' ? 'active-link' : ''}
                 onClick={() => goToSection('price')}
               >
                 Прайс
-              </a>
+              </a> */}
 
               <a
                 className={active === 'contacts' ? 'active-link' : ''}
