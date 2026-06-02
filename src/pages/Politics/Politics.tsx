@@ -1,4 +1,4 @@
-import Reveal from '../../components/Reveal/Reveal'
+
 import './Politics.scss'
 
 function Politics() {
@@ -6,7 +6,7 @@ function Politics() {
     <section className='politics'>
       <div className='container'>
 
-        <Reveal direction='up'>
+
           <div className='politics-card'>
 <h1>Политика Индивидуального предпринимателя Никуличевой Марины Викторовны в отношении обработки персональных данных</h1>
 
@@ -710,7 +710,7 @@ https://ательежарптица.рф/.
   актах Оператора.
 </p>
           </div>
-        </Reveal>
+
 
       </div>
     </section>
