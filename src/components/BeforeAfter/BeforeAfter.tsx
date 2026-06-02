@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import After from "../../assets/BeforeAfter/After.webp"
-import Before from "../../assets/BeforeAfter/Before.webp"
+import After from "../../assets/BeforeAfter/After.avif"
+import Before from "../../assets/BeforeAfter/Before.avif"
 import Reveal from '../Reveal/Reveal'
 import './BeforeAfter.scss'
 
@@ -34,6 +34,8 @@ function BeforeAfter() {
               src={After}
               alt='after'
               className='ba-image'
+              loading="lazy"
+              decoding="async"
             />
 
             {/* BEFORE IMAGE */}
@@ -47,6 +49,8 @@ function BeforeAfter() {
                 src={Before}
                 alt='before'
                 className='ba-image'
+                loading="lazy"
+                decoding="async"
               />
             </div>
 

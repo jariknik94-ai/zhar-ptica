@@ -1,71 +1,73 @@
+import { lazy, Suspense } from "react";
+
 import Navbar from "../../components/Navbar/Navbar";
 import Hero from "../../components/Hero/Hero";
-import Services from "../../components/Services/Services";
-import Advantages from "../../components/Advantages/Advantages";
-import Process from "../../components/Process/Process";
-import Reviews from "../../components/Reviews/Reviews";
 import CTA from "../../components/CTA/CTA";
 import Footer from "../../components/Footer/Footer";
-import BeforeAfter from "../../components/BeforeAfter/BeforeAfter";
-// import FloatingCTA from "../../components/FloatingCTA/FloatingCTA";
 import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
-import Contacts from "../../components/Contacts/Contacts"
+import Contacts from "../../components/Contacts/Contacts";
+
+// LAZY LOADED SECTIONS
+const Services = lazy(() => import("../../components/Services/Services"));
+const Advantages = lazy(() => import("../../components/Advantages/Advantages"));
+const Process = lazy(() => import("../../components/Process/Process"));
+const Reviews = lazy(() => import("../../components/Reviews/Reviews"));
+const BeforeAfter = lazy(() => import("../../components/BeforeAfter/BeforeAfter"));
 
 function Home() {
   return (
     <>
       <Navbar />
 
-      {/* HERO */}
+      {/* HERO (LCP PRIORITY) */}
       <section id="home">
         <Hero />
       </section>
 
-      {/* SERVICES */}
-      <section id="services">
-        <Services />
-      </section>
+      <Suspense fallback={null}>
 
-      {/* ADVANTAGES */}
-      <section id="advantages">
-        <Advantages />
-      </section>
+        {/* SERVICES */}
+        <section id="services">
+          <Services />
+        </section>
 
-      {/* PROCESS */}
-      <section id="process">
-        <Process />
-      </section>
+        {/* ADVANTAGES */}
+        <section id="advantages">
+          <Advantages />
+        </section>
 
-      {/* BEFORE AFTER */}
-      <section id="before-after">
-        <BeforeAfter />
-      </section>
+        {/* PROCESS */}
+        <section id="process">
+          <Process />
+        </section>
 
-      {/* REVIEWS */}
-      <section id="reviews">
-        <Reviews />
-      </section>
+        {/* BEFORE AFTER */}
+        <section id="before-after">
+          <BeforeAfter />
+        </section>
 
-      {/* CTA */}
+        {/* REVIEWS */}
+        <section id="reviews">
+          <Reviews />
+        </section>
+
+      </Suspense>
+
+      {/* CTA (оставляем сразу — важный конверсионный блок) */}
       <section id="price">
         <CTA />
       </section>
-      
 
       {/* CONTACTS */}
       <section id="contacts">
         <Contacts />
       </section>
 
-      {/* FLOATING UI */}
-      {/* <FloatingCTA /> */}
       <ScrollTopButton />
 
-
-      {/* FOOTER */}
       <Footer />
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;
