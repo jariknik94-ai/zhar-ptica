@@ -6,21 +6,30 @@ import Politics from "./pages/Politics/Politics";
 import CookiePopup from './components/CookiePopup/CookiePopup'
 import { useMetrika } from "./hooks/useMetrika";
 
-function App() {
+function AppContent() {
   useMetrika();
-  return (
-    <BrowserRouter>
 
+  return (
+    <>
       <ScrollToTop />
 
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/price' element={<PricePage />} />
-        <Route path="/politics" element={<Politics />} />
+        <Route path='/politics' element={<Politics />} />
       </Routes>
-    <CookiePopup />
+
+      <CookiePopup />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   )
 }
 
-export default App
+export default App;
