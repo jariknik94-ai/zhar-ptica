@@ -11,6 +11,5 @@ export function useMetrika() {
   const location = useLocation();
 
   useEffect(() => {
-    window.ym?.(109601977, "hit", location.pathname);
   }, [location]);
 }
