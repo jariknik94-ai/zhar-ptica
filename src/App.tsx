@@ -4,10 +4,10 @@ import PricePage from './pages/PricePage/PricePage.tsx'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Politics from "./pages/Politics/Politics";
 import CookiePopup from './components/CookiePopup/CookiePopup'
-// import { useMetrika } from "./hooks/useMetrika";
+
 
 function AppContent() {
-  // useMetrika();
+
 
   return (
     <>
