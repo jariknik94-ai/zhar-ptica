@@ -20,12 +20,6 @@ function CookiePopup() {
     setVisible(false)
   }
 
-  const rejectCookies = () => {
-    localStorage.setItem('cookiesRejected', 'true')
-    localStorage.removeItem('cookiesAccepted')
-    setVisible(false)
-  }
-
   if (!visible) return null
 
   return (
@@ -40,12 +34,8 @@ function CookiePopup() {
         </p>
 
         <div className="cookie__actions">
-          <button className="cookie__btn cookie__btn--reject" onClick={rejectCookies}>
-            Отклонить
-          </button>
-
           <button className="cookie__btn cookie__btn--accept" onClick={acceptCookies}>
-            Принять
+            OK
           </button>
         </div>
       </div>
