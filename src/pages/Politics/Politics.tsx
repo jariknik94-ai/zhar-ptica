@@ -1,8 +1,14 @@
-import './Politics.scss';
 import { politicsContent } from '../../data/politics';
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from '../../components/Footer/Footer'
+import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
+
+import './Politics.scss';
 
 const Politics = () => {
   return (
+    <>
+    <Navbar type="politics" />
     <section className="politics">
       <div className="container">
         <div className="politics-card">
@@ -13,6 +19,9 @@ const Politics = () => {
         </div>
       </div>
     </section>
+      <Footer />
+      <ScrollTopButton />
+    </>
   );
 };
 

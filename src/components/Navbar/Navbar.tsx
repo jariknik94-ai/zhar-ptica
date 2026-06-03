@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './Navbar.scss'
 
-type NavbarType = 'main' | 'price'
+type NavbarType = 'main' | 'price'| 'politics'
 
 function Navbar({ type = 'main' }: { type?: NavbarType }) {
   const navigate = useNavigate()
@@ -14,6 +14,7 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
   const navRef = useRef<HTMLDivElement | null>(null)
 
   const isPrice = type === 'price'
+  const isPolitics = type === 'politics'
 
   // LOCK SCROLL
   useEffect(() => {
@@ -60,7 +61,7 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
 
   // ACTIVE SCROLL SPY (ТОЛЬКО ДЛЯ MAIN)
   useEffect(() => {
-    if (isPrice) return
+    if (isPrice || isPolitics) return
 
     const sections = [
       'home',
@@ -122,7 +123,7 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
           </button>
 
           {/* MAIN NAV */}
-          {!isPrice && (
+          {!isPrice && !isPolitics && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
 
               <a
@@ -196,7 +197,15 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
 
             </nav>
           )}
-
+          {/* Politics NAV */}
+          {isPolitics  && (
+            <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+              <a onClick={goHome}>Главная</a>
+              <a className="active-link">
+                Политика
+              </a>
+            </nav>
+          )}
         </div>
       </header>
     </>
