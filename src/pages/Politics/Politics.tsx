@@ -15,7 +15,7 @@ const Politics = () => {
     canonical="/politics"
     breadcrumbs={[
         { name: "Главная", url: "/" },
-        { name: "Политика конфиденциальности", url: "/politics" }
+        { name: "Политика обработки персональных данных", url: "/politics" }
     ]}
 />
     <Navbar type="politics" />
