@@ -10,7 +10,7 @@ const Politics = () => {
   return (
     <>
     <SEO
-    title="Политика конфиденциальности | Жар-птица"
+    title="Политика обработки персональных данных | Жар птица"
     description="Политика обработки персональных данных."
     canonical="/politics"
     breadcrumbs={[

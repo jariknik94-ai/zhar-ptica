@@ -116,7 +116,7 @@ function PricePage() {
   return (
     <>
     <SEO
-    title="Прайс-лист | Жар-птица"
+    title="Прайс-лист | Жар птица"
     description="Стоимость реставрации подушек, одеял и перин. Цены на пошив постельного белья."
     canonical="/price"
     breadcrumbs={[

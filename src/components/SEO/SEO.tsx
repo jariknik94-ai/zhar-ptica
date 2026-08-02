@@ -43,7 +43,7 @@ export default function SEO({
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Жар-птица",
+    name: "Жар птица",
     url: SITE_URL,
   };
 
@@ -54,7 +54,7 @@ export default function SEO({
       "DryCleaningOrLaundry",
       "ProfessionalService",
     ],
-    name: "Ателье «Жар-птица»",
+    name: "Ателье «Жар птица»",
     foundingDate: "2011",
     url: SITE_URL,
     image: IMAGE,
@@ -121,7 +121,7 @@ export default function SEO({
     <meta name="theme-color" content="#07111f" />
     <meta
   name="author"
-  content="Ателье Жар-птица"
+  content="Ателье Жар птица"
     />
 
       <title>{title}</title>
