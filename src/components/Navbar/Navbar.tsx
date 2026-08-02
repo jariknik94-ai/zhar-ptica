@@ -161,12 +161,12 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
                 Отзывы
               </a>
 
-              {/* <a
+              {<a
                 className={active === 'price' ? 'active-link' : ''}
-                onClick={() => goToSection('price')}
+                onClick={() => navigate('/price')}
               >
                 Прайс
-              </a> */}
+              </a>}
 
               <a
                 className={active === 'contacts' ? 'active-link' : ''}
@@ -185,13 +185,11 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
               <a onClick={goHome}>Главная</a>
 
               <a className="active-link">Прайс</a>
-
               <a
                 onClick={() => {
                   navigate('/')
                   setTimeout(() => scrollTo('contacts'), 100)
-                }}
-              >
+                }}>
                 Контакты
               </a>
 
@@ -200,10 +198,18 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
           {/* Politics NAV */}
           {isPolitics  && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-              <a onClick={goHome}>Главная</a>
+              <a onClick={goHome}>
+                Главная
+              </a>
+              <a
+                className={active === 'price' ? 'active-link' : ''}
+                onClick={() => navigate('/price')}>
+                Прайс
+              </a>
               <a className="active-link">
                 Политика
               </a>
+              
             </nav>
           )}
         </div>
