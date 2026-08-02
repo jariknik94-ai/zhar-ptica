@@ -2,6 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from '../../components/Footer/Footer'
 import Reveal from '../../components/Reveal/Reveal'
 import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
+import SEO from "../../components/SEO/SEO";
 import './PricePage.scss'
 
 function PricePage() {
@@ -114,6 +115,15 @@ function PricePage() {
 
   return (
     <>
+    <SEO
+    title="Прайс-лист | Жар-птица"
+    description="Стоимость реставрации подушек, одеял и перин. Цены на пошив постельного белья."
+    canonical="/price"
+    breadcrumbs={[
+        { name: "Главная", url: "/" },
+        { name: "Прайс", url: "/price" }
+    ]}
+/>
       <Navbar type="price" />
 
       <section className='price-page'>

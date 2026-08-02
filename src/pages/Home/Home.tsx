@@ -6,6 +6,7 @@ import CTA from "../../components/CTA/CTA";
 import Footer from "../../components/Footer/Footer";
 import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
 import Contacts from "../../components/Contacts/Contacts";
+import SEO from "../../components/SEO/SEO";
 import React from "react";
 
 // LAZY LOADED SECTIONS
@@ -18,6 +19,12 @@ const BeforeAfter = React.lazy(() => import('../../components/BeforeAfter/Before
 function Home() {
   return (
     <>
+    <SEO
+    title="Жар-птица — реставрация подушек, одеял и перин в Прокопьевске"
+    description="Ателье Жар-птица выполняет реставрацию подушек, перин и одеял с 2011 года."
+    canonical="/"
+    localBusiness
+    />
       <Navbar />
 
       {/* HERO (LCP PRIORITY) */}
