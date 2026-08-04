@@ -93,6 +93,12 @@
   text-shadow: 0 0 12px rgba(245,158,11,0.25);
 }
 
+.contact-link {
+  display: flex !important; 
+  align-items: center !important;
+  gap: 8px !important;
+}
+
 .telegram-link svg {
   font-size: 18px;
   color: #2AABEE;
@@ -103,12 +109,33 @@
 }
 
 .contact-link.whatsapp-link svg {
+  font-size: 18px;
   color: #25D366 !important;
 }
 
 .contact-link.whatsapp-link:hover {
   text-shadow: 0 0 18px rgba(37, 211, 102, 0.35);
 }
+
+.contact-link.max-link svg{
+  font-size: 18px;
+  color: #4A6CFF ;
+}
+
+.contact-link.max-link svg:hover {
+  color: #3557f5;
+}
+.max-icon {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  margin-right: 6px;
+  color: #4A6CFF;
+  fill: none;
+  flex-shrink: 0;
+}
+
 
 /*  RESPONSIVE  */
 

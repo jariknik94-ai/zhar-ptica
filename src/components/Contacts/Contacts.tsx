@@ -1,6 +1,7 @@
 import Reveal from '../Reveal/Reveal'
 import { FaTelegramPlane } from "react-icons/fa"
 import { FaWhatsapp } from 'react-icons/fa'
+import MaxIcon from "../../assets/icons/max.svg?react";
 
 import './Contacts.scss'
 
@@ -48,7 +49,7 @@ function Contacts() {
                 rel="noreferrer"
                 >
                 <FaTelegramPlane />
-                &nbsp;Telegram
+                Telegram
                 </a>
                 <a
                 className="contact-link whatsapp-link"
@@ -57,7 +58,16 @@ function Contacts() {
                 rel="noreferrer"
               >
                 <FaWhatsapp />
-                &nbsp;WhatsApp
+                WhatsApp
+              </a>
+              <a
+                className="contact-link max-link"
+                href="https://max.ru/u/f9LHodD0cOJay_DlowUM4tHCaFx3YyI-lyKuGWdRcxwSVZCcRfU3zl6gcVg"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <MaxIcon className="max-icon" />
+                MAX
               </a>
                 </div>
             <div className="contact-card">
@@ -83,7 +93,7 @@ function Contacts() {
             <iframe
               src="https://yandex.ru/map-widget/v1/?um=constructor%3A7b4919caa955e797f5559306861bdd05cfa2da93e3d4fe597d6afc4d7aa3b9f0&amp;source=constructor"
               width="100%"
-              height="575"
+              height="650"
               frameBorder="0"
               loading="lazy"
             />
