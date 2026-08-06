@@ -121,7 +121,7 @@ function PricePage() {
     canonical="/price"
     breadcrumbs={[
         { name: "Главная", url: "/" },
-        { name: "Прайс", url: "/price" }
+        { name: "Прайс-лист", url: "/price" }
     ]}
 />
       <Navbar type="price" />
