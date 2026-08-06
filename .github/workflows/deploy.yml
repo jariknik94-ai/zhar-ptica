@@ -2,7 +2,8 @@ name: Deploy to VPS
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -35,4 +36,3 @@ jobs:
             npm run build
 
             echo "🚀 Deployment finished successfully"
-            # trigger test
