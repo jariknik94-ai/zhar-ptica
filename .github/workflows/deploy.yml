@@ -1,8 +1,9 @@
 name: Deploy to VPS
-# Trigger workflow refresh
+
 on:
   push:
     branches: ["test", "main"]
+  workflow_dispatch:
 
 jobs:
   deploy:
