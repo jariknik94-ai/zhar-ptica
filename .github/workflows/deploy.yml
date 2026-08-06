@@ -1,5 +1,5 @@
 name: Deploy to VPS
-
+# Trigger workflow refresh
 on:
   push:
     branches: ["main"]
