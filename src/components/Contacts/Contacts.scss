@@ -48,7 +48,7 @@
 .contact-card span {
   display: block;
   margin-bottom: 16px;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 600;
   color: #f59e0b;
 }
@@ -78,6 +78,9 @@
   column-gap: 42px;
   align-items: start;
   margin-top: 6px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 100;
 }
 
 .contacts-contact-column {
