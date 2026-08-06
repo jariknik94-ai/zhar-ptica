@@ -99,7 +99,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 /* ---------- ICONS ---------- */
@@ -158,11 +158,11 @@
   }
 
   .phone-number {
-    font-size: clamp(15px, 1.5vw, 18px);
+    font-size: clamp(18px, 1.5vw, 18px);
   }
 
   .contact-link {
-    font-size: clamp(14px, 1.4vw, 18px);
+    font-size: clamp(18px, 1.4vw, 18px);
   }
 
   .contact-link svg,
@@ -195,12 +195,12 @@
   }
 
   .phone-number {
-    font-size: 15px;
+    font-size: 18px;
     white-space: nowrap;
   }
 
   .contact-link {
-    font-size: 15px;
+    font-size: 18px;
     gap: 5px;
   }
 
@@ -233,11 +233,11 @@
   }
 
   .phone-number {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .contact-link {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .contact-link svg,
