@@ -2,8 +2,7 @@ name: Deploy to VPS
 
 on:
   push:
-    branches: ["test", "main"]
-#   workflow_dispatch:
+    branches: ["main"]
 
 jobs:
   deploy:
@@ -22,8 +21,9 @@ jobs:
             echo "📦 Syncing repository..."
             cd /var/www/zhar-ptica
 
-            git fetch origin
-            git reset --hard origin/${{ github.ref_name }}
+            git fetch --all
+            git reset --hard origin/main
+            git clean -fd
 
             echo "📦 Installing dependencies..."
             npm ci --prefer-offline --no-audit
