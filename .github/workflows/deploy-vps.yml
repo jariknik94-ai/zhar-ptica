@@ -35,4 +35,5 @@ jobs:
             echo "🏗 Building project..."
             npm run build
 
-            echo "🚀 Deployment finished successfully"
+            echo "🚀 Deployment finished successfully"# trigger
+            echo "TEST AUTO DEPLOY"
