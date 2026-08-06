@@ -36,4 +36,3 @@ jobs:
             npm run build
 
             echo "🚀 Deployment finished successfully"# trigger
-            echo "TEST AUTO DEPLOY"
