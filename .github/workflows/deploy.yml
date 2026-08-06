@@ -22,7 +22,7 @@ jobs:
             cd /var/www/zhar-ptica
 
             git fetch origin
-            git reset --hard origin/main
+            git reset --hard origin/${{ github.ref_name }}
 
             echo "📦 Installing dependencies..."
             npm ci --prefer-offline --no-audit
