@@ -60,7 +60,7 @@ export default function SEO({
     image: IMAGE,
     logo: IMAGE,
     telephone: "+79516125805",
-    priceRange: "₽₽",
+    priceRange: "₽",
     currenciesAccepted: "RUB",
     paymentAccepted: [
       "Cash",
@@ -136,7 +136,7 @@ export default function SEO({
       />
 
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Жар-птица" />
+      <meta property="og:site_name" content="Жар птица" />
       <meta property="og:locale" content="ru_RU" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
