@@ -35,26 +35,33 @@ jobs:
             echo "🏗 Building project..."
             npm run build
 
-            echo "🔎 Checking IndexNow key file..." 
-            test -f dist/35b9ec9bd4634f92814ac23f3b6531fc.txt 
-            
-            echo "📡 Sending URLs to IndexNow..." 
-            
-            curl -sS -X POST "https://api.indexnow.org/indexnow" \ 
-              -H "Content-Type: application/json; charset=utf-8" \ 
-              -d '{ 
-                "host": "xn--80aaasagpu3bjqh7c5d.xn--p1ai", 
-                "key": "'"${{ secrets.INDEXNOW_KEY }}"'", 
-                "keyLocation": "https://xn--80aaasagpu3bjqh7c5d.xn--p1ai/35b9ec9bd4634f92814ac23f3b6531fc.txt", 
-                "urlList": [ "
-                  https://xn--80aaasagpu3bjqh7c5d.xn--p1ai/", 
-                  "https://xn--80aaasagpu3bjqh7c5d.xn--p1ai/price", 
-                  "https://xn--80aaasagpu3bjqh7c5d.xn--p1ai/politics" 
-                  ] 
-                }' 
-                
+            echo "🔎 Checking IndexNow key file..."
+            test -f dist/35b9ec9bd4634f92814ac23f3b6531fc.txt
+
+            echo "📡 Sending URLs to IndexNow..."
+
+            cat > /tmp/indexnow.json <<EOF
+            {
+              "host": "xn--80aaasagpu3bjqh7c5d.xn--p1ai",
+              "key": "${{ secrets.INDEXNOW_KEY }}",
+              "keyLocation": "https://xn--80aaasagpu3bjqh7c5d.xn--p1ai/35b9ec9bd4634f92814ac23f3b6531fc.txt",
+              "urlList": [
+                "https://xn--80aaasagpu3bjqh7c5d.xn--p1ai/",
+                "https://xn--80aaasagpu3bjqh7c5d.xn--p1ai/price",
+                "https://xn--80aaasagpu3bjqh7c5d.xn--p1ai/politics"
+              ]
+            }
+            EOF
+
+            curl -sS \
+              -X POST \
+              -H "Content-Type: application/json; charset=utf-8" \
+              --data-binary @/tmp/indexnow.json \
+              "https://api.indexnow.org/indexnow"
+
+            rm -f /tmp/indexnow.json
+
             echo ""
-            
-            echo "🚀 Deployment finished successfully"# trigger
+            echo "🚀 Deployment finished successfully"
 
 
