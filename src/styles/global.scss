@@ -90,6 +90,7 @@
 
   --button-text: #ffffff;
 
+  --navbar-backdrop-filter: blur(25px);
   --navbar-bg: rgba(10, 15, 25, 0.35);
   --navbar-border: rgba(255, 255, 255, 0.08);
 
@@ -818,9 +819,13 @@ h2:hover {
   .navbar {
     background: var(--navbar-bg) !important;
 
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    -webkit-backdrop-filter:
+      var(--navbar-backdrop-filter) !important;
 
-    border-bottom: 1px solid var(--navbar-border);
+    backdrop-filter:
+      var(--navbar-backdrop-filter) !important;
+
+    border-bottom:
+      1px solid var(--navbar-border);
   }
 }
