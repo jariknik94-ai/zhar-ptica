@@ -1,31 +1,35 @@
+/* PRICE PAGE */
+
 .price-page {
   padding: 140px 0;
 }
 
-
-/* PAGE TITLE */
-
 .price-page h1 {
-  text-align: center;
-
   margin-bottom: 70px;
 
-  font-size: clamp(42px, 6vw, 64px);
+  text-align: center;
 
+  font-size: clamp(42px, 6vw, 64px);
   color: var(--text);
 }
 
 
-/* PRICE SECTION */
+/* PRICE SECTION — GLASS */
 
 .price-section {
   margin-bottom: 50px;
 
-  background: var(--card);
+  /*
+    Собственный фон секции.
+    Не используем var(--card), чтобы global.scss
+    не перекрывал эффект стекла.
+  */
+  background: rgba(255, 255, 255, 0.05) !important;
 
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
-  border: 1px solid var(--stroke);
+  border: 1px solid var(--price-card-border);
 
   border-radius: 28px;
 
@@ -50,7 +54,6 @@
   z-index: 2;
 
   margin-bottom: 25px;
-
   padding: 10px 0;
 
   font-size: 28px;
@@ -60,10 +63,30 @@
   background: var(--price-sticky-bg);
 
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   transition:
     color 0.35s ease,
     background 0.35s ease;
+}
+
+.price-section h3 {
+  margin-bottom: 24px;
+
+  font-size: 24px;
+
+  color: var(--text-h);
+}
+
+.price-section h3 span {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 17px;
+  font-weight: 400;
+
+  color: var(--muted);
 }
 
 
@@ -76,7 +99,7 @@
 }
 
 
-/*  TABLE HEADER  */
+/*  HEADER  */
 
 .price-table th {
   padding: 18px;
@@ -92,22 +115,16 @@
     color 0.35s ease;
 }
 
-
-/* Размер / Услуга */
-
 .price-table th:first-child {
   text-align: left;
 }
-
-
-/* Стоимость */
 
 .price-table th:last-child {
   text-align: right;
 }
 
 
-/*  TABLE CELLS  */
+/*    CELLS    */
 
 .price-table td {
   padding: 16px 18px;
@@ -122,34 +139,9 @@
     border-color 0.3s ease;
 }
 
-
-/*  ROWS  */
-
-.price-table tr {
-  transition:
-    background 0.3s ease;
+.price-table td:first-child {
+  text-align: left;
 }
-
-
-/* Чётные строки */
-
-.price-table tr:nth-child(even) {
-  background: var(--table-row);
-}
-
-
-/* Hover */
-
-.price-table tr:hover {
-  background: var(--table-row-hover);
-}
-
-.price-table tr:hover td {
-  background: var(--table-row-hover);
-}
-
-
-/*  PRICE  */
 
 .price-table td:last-child {
   text-align: right;
@@ -160,19 +152,32 @@
 }
 
 
-/*  FIRST COLUMN  */
+/*    ROWS    */
 
-.price-table td:first-child {
-  text-align: left;
+.price-table tr {
+  transition:
+    background 0.3s ease;
+}
+
+.price-table tr:nth-child(even) {
+  background: var(--table-row);
+}
+
+.price-table tr:hover {
+  background: var(--table-row-hover);
+}
+
+.price-table tr:hover td {
+  background: transparent;
 }
 
 
-/* SECTION TITLES */
+/* SECTION TITLE */
 
 .section-title {
-  text-align: center;
-
   margin: 70px 0 35px;
+
+  text-align: center;
 
   font-size: 42px;
 
@@ -194,30 +199,6 @@
 }
 
 
-/* TABLE SUBTITLE */
-
-.price-section h3 {
-  margin-bottom: 24px;
-
-  font-size: 24px;
-
-  color: var(--text-h);
-}
-
-
-.price-section h3 span {
-  display: block;
-
-  margin-top: 5px;
-
-  font-size: 17px;
-
-  font-weight: 400;
-
-  color: var(--muted);
-}
-
-
 /* SINGLE TABLE */
 
 .single-table {
@@ -230,7 +211,8 @@
 /* DARK THEME */
 
 :root {
-  --text-h: #ffffff;
+  --text-h:
+    #ffffff;
 
   --table-head:
     rgba(245, 158, 11, 0.15);
@@ -244,6 +226,9 @@
   --table-row-hover:
     rgba(255, 255, 255, 0.04);
 
+  --price-card-border:
+    rgba(255, 255, 255, 0.08);
+
   --price-sticky-bg:
     rgba(7, 17, 31, 0.9);
 }
@@ -256,23 +241,40 @@
     #1f2937;
 
   --table-head:
-    rgba(191, 217, 252, 0.45);
+    rgba(191, 217, 252, 0.32);
 
   --table-head-text:
     #1f2937;
 
   --table-row:
-    rgba(31, 41, 55, 0.025);
+    rgba(255, 255, 255, 0.10);
 
   --table-row-hover:
-    rgba(167, 193, 252, 0.12);
+    rgba(167, 193, 252, 0.16);
+
+  --price-card-border:
+    rgba(31, 41, 55, 0.10);
 
   --price-sticky-bg:
-    rgba(247, 249, 252, 0.92);
+    rgba(247, 249, 252, 0.55);
 }
 
 
-/* RESPONSIVE */
+/* LIGHT THEME — PRICE GLASS */
+
+[data-theme='light'] .price-section {
+  background:
+    rgba(255, 255, 255, 0.20) !important;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-color:
+    var(--price-card-border);
+}
+
+
+/* RESPONSIVE — 1200px */
 
 @media (max-width: 1200px) {
   .price-row {
@@ -281,8 +283,9 @@
 }
 
 
-@media (max-width: 768px) {
+/* RESPONSIVE — 768px */
 
+@media (max-width: 768px) {
   .price-page {
     padding: 110px 0 80px;
   }

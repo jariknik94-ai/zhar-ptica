@@ -1,3 +1,5 @@
+/* PROCESS */
+
 .process {
   padding: 130px 0;
 }
@@ -17,27 +19,24 @@
 }
 
 
-/* STEP CARD */
+/* STEP CARD — GLASS */
 
 .step {
-  background:
-    var(--process-card-bg);
-
-  border:
-    1px solid var(--process-card-border);
-
-  border-radius: 24px;
-
   padding: 35px;
 
-  backdrop-filter:
-    blur(14px);
+  background: var(--process-card-bg);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid var(--process-card-border);
+  border-radius: 24px;
 
   transition:
     transform 0.35s ease,
-    box-shadow 0.35s ease,
     background 0.35s ease,
-    border-color 0.35s ease;
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 
   will-change: transform;
 }
@@ -47,13 +46,12 @@
 
 .step:hover {
   transform:
-    translateY(-10px) scale(1.02);
+    translateY(-10px)
+    scale(1.02);
 
-  background:
-    var(--process-card-hover-bg);
+  background: var(--process-card-hover-bg);
 
-  border-color:
-    var(--process-card-hover-border);
+  border-color: var(--process-card-hover-border);
 
   box-shadow:
     0 30px 70px var(--process-card-shadow);
@@ -64,11 +62,9 @@
 
 .step span {
   font-size: 54px;
-
   font-weight: 800;
 
-  color:
-    var(--process-number);
+  color: var(--process-number);
 
   opacity: 0.25;
 
@@ -84,8 +80,7 @@
 
   font-size: 24px;
 
-  color:
-    var(--process-title);
+  color: var(--process-title);
 
   transition:
     color 0.35s ease;
@@ -95,7 +90,6 @@
 /* DARK THEME */
 
 :root {
-
   --process-card-bg:
     rgba(255, 255, 255, 0.05);
 
@@ -122,15 +116,14 @@
 /* LIGHT THEME */
 
 [data-theme='light'] {
-
   --process-card-bg:
-    rgba(255, 255, 255, 0.68);
+    rgba(255, 255, 255, 0.22);
 
   --process-card-border:
-    rgba(31, 41, 55, 0.1);
+    rgba(31, 41, 55, 0.10);
 
   --process-card-hover-bg:
-    rgba(255, 255, 255, 0.9);
+    rgba(255, 255, 255, 0.32);
 
   --process-card-hover-border:
     rgba(167, 193, 252, 0.7);
@@ -146,24 +139,34 @@
 }
 
 
-/* RESPONSIVE */
+/* LIGHT THEME — PROCESS GLASS */
+
+[data-theme='light'] .step {
+  background:
+    rgba(255, 255, 255, 0.22) !important;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-color:
+    var(--process-card-border);
+}
+
+
+/* RESPONSIVE — 768px */
 
 @media (max-width: 768px) {
-
   .process {
     padding: 90px 0;
   }
-
 
   .step {
     padding: 28px;
   }
 
-
   .step span {
     font-size: 42px;
   }
-
 
   .step h3 {
     font-size: 20px;

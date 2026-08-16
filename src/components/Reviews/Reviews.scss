@@ -1,3 +1,5 @@
+/* REVIEWS */
+
 .reviews {
   padding: 130px 0;
 }
@@ -6,38 +8,35 @@
 /* GRID */
 
 .reviews-grid {
-  margin-top: 60px;
-
   display: grid;
 
   grid-template-columns:
     repeat(auto-fit, minmax(300px, 1fr));
 
   gap: 30px;
+
+  margin-top: 60px;
 }
 
 
-/* CARD */
+/* REVIEW CARD — GLASS */
 
 .review-card {
-  background:
-    var(--review-card-bg);
-
-  border:
-    1px solid var(--review-card-border);
-
-  backdrop-filter:
-    blur(18px);
-
-  border-radius: 28px;
-
   padding: 35px;
+
+  background: var(--review-card-bg);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid var(--review-card-border);
+  border-radius: 28px;
 
   transition:
     transform 0.35s ease,
-    box-shadow 0.35s ease,
     background 0.35s ease,
-    border-color 0.35s ease;
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 
   will-change: transform;
 }
@@ -47,13 +46,12 @@
 
 .review-card:hover {
   transform:
-    translateY(-10px) scale(1.02);
+    translateY(-10px)
+    scale(1.02);
 
-  background:
-    var(--review-card-hover-bg);
+  background: var(--review-card-hover-bg);
 
-  border-color:
-    var(--review-card-hover-border);
+  border-color: var(--review-card-hover-border);
 
   box-shadow:
     0 30px 70px var(--review-card-shadow);
@@ -63,14 +61,12 @@
 /* TEXT */
 
 .review-card p {
-  font-size: 18px;
+  margin-bottom: 20px;
 
+  font-size: 18px;
   line-height: 1.8;
 
-  color:
-    var(--review-text);
-
-  margin-bottom: 20px;
+  color: var(--review-text);
 
   transition:
     color 0.35s ease;
@@ -80,8 +76,7 @@
 /* AUTHOR */
 
 .review-card span {
-  color:
-    var(--accent);
+  color: var(--accent);
 
   font-weight: 600;
 
@@ -93,7 +88,6 @@
 /* DARK THEME */
 
 :root {
-
   --review-card-bg:
     rgba(255, 255, 255, 0.06);
 
@@ -117,15 +111,14 @@
 /* LIGHT THEME */
 
 [data-theme='light'] {
-
   --review-card-bg:
-    rgba(255, 255, 255, 0.68);
+    rgba(255, 255, 255, 0.22);
 
   --review-card-border:
-    rgba(31, 41, 55, 0.1);
+    rgba(31, 41, 55, 0.10);
 
   --review-card-hover-bg:
-    rgba(255, 255, 255, 0.9);
+    rgba(255, 255, 255, 0.32);
 
   --review-card-hover-border:
     rgba(167, 193, 252, 0.7);
@@ -134,20 +127,30 @@
     rgba(65, 52, 35, 0.14);
 
   --review-text:
-    rgba(31, 41, 55, 0.72);
+    rgba(31, 41, 55, 0.88);
+}
+
+
+/* LIGHT THEME — REVIEW GLASS */
+
+[data-theme='light'] .review-card {
+  background:
+    rgba(255, 255, 255, 0.22) !important;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-color:
+    var(--review-card-border);
 }
 
 
 /* RESPONSIVE — 992px */
 
 @media (max-width: 992px) {
-
   .reviews-grid {
     grid-template-columns:
-      repeat(
-        2,
-        minmax(0, 1fr)
-      );
+      repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -155,18 +158,14 @@
 /* RESPONSIVE — 768px */
 
 @media (max-width: 768px) {
-
   .reviews {
     padding: 90px 0;
   }
 
-
   .reviews-grid {
     grid-template-columns: 1fr;
-
     gap: 22px;
   }
-
 
   .review-card {
     padding: 28px;
@@ -177,13 +176,10 @@
 /* RESPONSIVE — 480px */
 
 @media (max-width: 480px) {
-
   .review-card {
     padding: 22px;
-
     border-radius: 22px;
   }
-
 
   .service-card h3,
   .advantage-card h3,
