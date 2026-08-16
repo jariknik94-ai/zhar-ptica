@@ -1,3 +1,5 @@
+/* FLOATING CTA */
+
 .floating-cta {
   position: fixed;
 
@@ -5,6 +7,7 @@
   bottom: 24px;
 
   display: flex;
+
   flex-direction: column;
 
   gap: 12px;
@@ -12,47 +15,93 @@
   z-index: 9999;
 }
 
-/* кнопка */
+
+/* CTA BUTTON */
+
 .cta-btn {
   width: 58px;
   height: 58px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 50%;
 
-  color: white;
+  color: #ffffff;
 
   font-size: 24px;
 
   backdrop-filter: blur(12px);
 
-  transition: 0.3s;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow:
+    0 10px 30px var(--cta-shadow);
 }
 
-/* telegram */
+
+/* TELEGRAM */
+
 .cta-btn.telegram {
-  background: linear-gradient(135deg, #2AABEE, #229ED9);
+  background:
+    linear-gradient(
+      135deg,
+      #2AABEE,
+      #229ED9
+    );
 }
 
-/* hover */
+
+/* HOVER */
+
 .cta-btn:hover {
-  transform: translateY(-6px) scale(1.05);
+  transform:
+    translateY(-6px)
+    scale(1.05);
 
-  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  box-shadow:
+    0 18px 40px var(--cta-hover-shadow);
 }
 
-/* ===== RESPONSIVE ===== */
+
+/* DARK THEME */
+
+:root {
+
+  --cta-shadow:
+    rgba(0, 0, 0, 0.3);
+
+  --cta-hover-shadow:
+    rgba(0, 0, 0, 0.45);
+}
+
+
+/* LIGHT THEME */
+
+[data-theme='light'] {
+
+  --cta-shadow:
+    rgba(65, 52, 35, 0.18);
+
+  --cta-hover-shadow:
+    rgba(65, 52, 35, 0.28);
+}
+
+
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
+
   .floating-cta {
     right: 18px;
+
     bottom: 18px;
   }
+
 
   .cta-btn {
     width: 52px;

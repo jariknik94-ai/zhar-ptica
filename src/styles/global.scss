@@ -1,8 +1,5 @@
-/* 
-   TT WELLINGTONS (LOCAL FONTS)
- */
+/* TT WELLINGTONS — LOCAL FONTS */
 
-/* Thin */
 @font-face {
   font-family: 'TT Wellingtons';
   src: url('/fonts/TT-Wellingtons-Thin.woff2') format('woff2');
@@ -74,29 +71,38 @@
   font-style: normal;
   font-display: swap;
 }
-/* 
-   DESIGN SYSTEM (BASE)
- */
+
+
+/* DESIGN SYSTEM — DARK THEME */
 
 :root {
-
-  /* colors */
   --bg: #07111f;
+  --bg-secondary: #0c1727;
+
   --text: #ffffff;
-  --muted: rgba(255,255,255,0.7);
+  --muted: rgba(255, 255, 255, 0.7);
 
   --accent: #f59e0b;
   --accent-2: #f97316;
 
-  --card: rgba(255,255,255,0.06);
-  --stroke: rgba(255,255,255,0.1);
+  --card: rgba(255, 255, 255, 0.06);
+  --stroke: rgba(255, 255, 255, 0.1);
 
-  /* radius */
+  --button-text: #ffffff;
+
+  --navbar-bg: rgba(10, 15, 25, 0.35);
+  --navbar-border: rgba(255, 255, 255, 0.08);
+
+  --shadow: rgba(0, 0, 0, 0.4);
+  --shadow-accent: rgba(249, 115, 22, 0.3);
+
+  --glow-primary: rgba(249, 115, 22, 0.18);
+  --glow-secondary: rgba(245, 158, 11, 0.08);
+
   --radius-sm: 12px;
   --radius-md: 18px;
   --radius-lg: 28px;
 
-  /* spacing */
   --s-1: 8px;
   --s-2: 12px;
   --s-3: 16px;
@@ -104,44 +110,94 @@
   --s-5: 32px;
   --s-6: 48px;
   --s-7: 64px;
+
+  --theme-transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-html, body {
+
+/* LIGHT THEME */
+
+[data-theme='light'] {
+  --bg: #f7f9fc;
+  --bg-secondary: #edf3fa;
+
+  --text: #171a1f;
+  --muted: rgba(23, 26, 31, 100);
+
+  /* #f59e0b -> #BFD9FC */
+  --accent: #BFD9FC;
+
+  /* #f97316 -> #A7C1FC */
+  --accent-2: #A7C1FC;
+
+  --card: rgba(255, 255, 255, 0.72);
+  --stroke: rgba(32, 37, 45, 0.1);
+
+  --button-text: #20252d;
+
+  --navbar-bg: rgba(247, 243, 237, 0.35);
+  --navbar-border: rgba(32, 37, 45, 0.08);
+
+  --shadow: rgba(31, 41, 55, 0.12);
+  --shadow-accent: rgba(167, 193, 252, 0.35);
+
+  /* Светлые голубые пятна */
+  --glow-primary: rgba(167, 193, 252, 0.20);
+  --glow-secondary: rgba(191, 217, 252, 0.24);
+}
+
+
+/* GLOBAL */
+
+html,
+body {
   overflow-x: hidden;
   max-width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 #root {
   overflow-x: hidden;
 }
 
-// section, header, div {
-//   max-width: 100%;
-// }
-
-/* Плавный скролл по странице */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Сброс стандартных стилей */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Базовые настройки сайта */
+
+/* BODY */
+
 body {
-  font-family: 'TT Wellingtons';
-  background: #07111f;
-  color: white;
+  font-family: 'TT Wellingtons', sans-serif;
+
+  background: var(--bg);
+  color: var(--text);
+
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
 }
 
-/* Премиальные шрифты для заголовков */
-h1, h2, h3 {
-  font-family: 'TT Wellingtons';
+
+/* TYPOGRAPHY */
+
+h1,
+h2,
+h3 {
+  font-family: 'TT Wellingtons', sans-serif;
   letter-spacing: 0.5px;
+  color: var(--text);
+
+  transition: color 0.35s ease;
 }
 
 h1 {
@@ -153,83 +209,17 @@ h3 {
   font-weight: 200;
 }
 
-/* Декоративный световой фон */
-body::before {
-  content: '';
-  position: fixed;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(
-    circle,
-    rgba(249,115,22,0.18),
-    transparent 70%
-  );
-  top: -250px;
-  right: -250px;
-  z-index: -1;
-}
-
-/* Контейнер */
-.container {
-  width: 90%;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-/*  BUTTONS  */
-button {
-  border: none;
-  cursor: pointer;
-  transition: 0.4s;
-  font-size: 17px;
-  border-radius: 18px;
-  padding: 18px 38px;
-  font-weight: 400;
-  position: relative;
-  overflow: hidden;
-}
-
-/* shine эффект */
-button::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.25),
-    transparent
-  );
-  transition: 0.6s;
-}
-
-button:hover::after {
-  left: 100%;
-}
-
-/* основной кнопочный стиль */
-.hero button {
-  background: linear-gradient(135deg, #f59e0b, #f97316);
-  color: white;
-  box-shadow: 0 10px 30px rgba(249,115,22,0.3);
-  margin-right: 25px;
-}
-
-.hero button:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 18px 45px rgba(249,115,22,0.45);
-}
-
-/*  TYPOGRAPHY  */
 h2 {
   font-size: 52px;
   font-weight: 400;
   text-align: center;
 
-  background: linear-gradient(90deg, #ffffff, #f59e0b);
+  background: linear-gradient(
+    90deg,
+    var(--text),
+    var(--accent)
+  );
+
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -238,167 +228,749 @@ h2 {
 p {
   font-size: 18px;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
   font-weight: 100;
+
+  transition: color 0.35s ease;
 }
 
-/*  LUXURY GLOW LAYER  */
+
+/*DECORATIVE LIGHT */
+
+body::before {
+  content: '';
+
+  position: fixed;
+
+  width: 700px;
+  height: 700px;
+
+  top: -250px;
+  right: -250px;
+
+  background: radial-gradient(
+    circle,
+    var(--glow-primary),
+    transparent 70%
+  );
+
+  z-index: -1;
+  pointer-events: none;
+
+  transition: background 0.35s ease;
+}
 
 body::after {
   content: '';
+
   position: fixed;
   inset: 0;
+
   background:
     radial-gradient(
       circle at 20% 30%,
-      rgba(245,158,11,0.08),
+      var(--glow-secondary),
       transparent 40%
     ),
     radial-gradient(
       circle at 80% 70%,
-      rgba(249,115,22,0.06),
+      var(--glow-primary),
       transparent 45%
     );
+
   pointer-events: none;
   z-index: -1;
+
+  transition: background 0.35s ease;
 }
 
-/*  SOFT FLOAT EFFECT  */
 
-.service-card:hover,
-.advantage-card:hover,
-.price-card:hover,
-.review-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+/* CONTAINER */
+
+.container {
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
-/*  BUTTON MICRO INTERACTION  */
 
+/* BUTTONS */
+
+button {
+  border: none;
+  cursor: pointer;
+
+  font-size: 17px;
+  font-weight: 400;
+
+  border-radius: 18px;
+  padding: 18px 38px;
+
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+button::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+
+  transition: 0.6s;
+}
+
+button:hover::after {
+  left: 100%;
+}
+
+
+/* HERO BUTTON */
+
+.hero button {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-2)
+  );
+
+  color: var(--button-text);
+
+  box-shadow:
+    0 10px 30px var(--shadow-accent);
+
+  margin-right: 25px;
+}
+
+.hero button:hover {
+  transform: translateY(-5px) scale(1.02);
+
+  box-shadow:
+    0 18px 45px var(--shadow-accent);
+}
+
+
+/* PRIMARY BUTTON */
+
+.primary-btn:hover {
+  transform: translateY(-5px) scale(1.02);
+
+  box-shadow:
+    0 18px 45px var(--shadow-accent);
+}
+
+.primary-btn:active,
 button:active {
   transform: scale(0.96);
 }
 
-/*  NAVBAR GLASS ENHANCE  */
+
+/* NAVBAR GLASS */
 
 .navbar {
   backdrop-filter: blur(25px);
-  background: rgba(10, 15, 25, 0.35);
-}
+  -webkit-backdrop-filter: blur(25px);
 
-/*  TEXT GLOW HOVER  */
+  background: var(--navbar-bg);
 
-h1:hover, h2:hover {
-  text-shadow: 0 0 25px rgba(245,158,11,0.25);
-}
-/* smooth cursor feel */
-html {
-  scroll-behavior: smooth;
-}
+  border-bottom:
+    1px solid var(--navbar-border);
 
-/* better selection */
-::selection {
-  background: rgba(245,158,11,0.4);
-  color: white;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 
+/* NAV LINKS */
 
-/* карточки — “подъём” как у Apple UI */
+nav a {
+  color: var(--text);
+
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--accent);
+
+  text-shadow:
+    0 0 18px var(--glow-secondary);
+}
+
+
+/* TEXT GLOW */
+
+h1:hover,
+h2:hover {
+  text-shadow:
+    0 0 25px var(--glow-secondary);
+}
+
+
+/* CARDS */
+
+.service-card,
+.advantage-card,
 .price-card,
+.review-card,
 .step {
-  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease;
+
   will-change: transform;
 }
 
-/* hover — ощущение слоя */
 .service-card:hover,
 .advantage-card:hover,
 .review-card:hover,
 .price-card:hover,
 .step:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
-}
+  transform:
+    translateY(-10px)
+    scale(1.02);
 
-/* ссылки — мягкое свечение */
-nav a {
-  transition: 0.3s ease;
-}
-
-nav a:hover {
-  text-shadow: 0 0 18px rgba(245,158,11,0.35);
+  box-shadow:
+    0 30px 70px var(--shadow);
 }
 
 
-/* hover как у остальных кнопок */
-.primary-btn:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 18px 45px rgba(249,115,22,0.45);
+/* SELECTION */
+
+::selection {
+  background: var(--accent);
+  color: var(--button-text);
 }
 
-/* click эффект */
-.primary-btn:active {
-  transform: scale(0.96);
+
+/* LIGHT THEME — COMPONENT OVERRIDES */
+
+[data-theme='light'] {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text);
+  }
+
+  p {
+    color: var(--muted);
+  }
+
+  a {
+    color: var(--text);
+  }
+
+
+  /*  CARDS  */
+
+  .service-card,
+  .advantage-card,
+  .price-card,
+  .review-card,
+  .step,
+  .contact-card,
+  .price-section {
+    background: var(--card);
+    border-color: var(--stroke);
+  }
+
+  .service-card:hover,
+  .advantage-card:hover,
+  .review-card:hover,
+  .price-card:hover,
+  .step:hover,
+  .contact-card:hover {
+    background: rgba(255, 255, 255, 0.88);
+
+    border-color:
+      rgba(167, 193, 252, 0.55);
+
+    box-shadow:
+      0 30px 70px var(--shadow);
+  }
+
+
+  /*  ACCENTS  */
+
+  .icon,
+  .contact-card span,
+  .review-card span,
+  .price-table td:last-child {
+    color: var(--accent);
+  }
+
+
+  /*  NAV LINKS  */
+
+  .nav a {
+    color: var(--text);
+    background: transparent;
+  }
+
+  .nav a:hover {
+    color: var(--accent-2);
+    background: transparent;
+  }
+
+  .active-link {
+    color: var(--text) !important;
+  }
+
+  .active-link::after {
+    background: linear-gradient(
+      90deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+    box-shadow:
+      0 0 12px var(--glow-secondary),
+      0 0 24px var(--glow-primary);
+  }
+
+
+  /*  HERO  */
+
+  .hero p {
+    color: var(--muted);
+  }
+
+
+  /*  SECONDARY BUTTON  */
+
+  .secondary-btn {
+    background:
+      rgba(255, 255, 255, 0.55) !important;
+
+    border-color:
+      rgba(32, 37, 45, 0.12) !important;
+
+    color:
+      var(--text) !important;
+  }
+
+
+  /*  BEFORE / AFTER  */
+
+  .ba-handle {
+    background: linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+    border-color: #ffffff;
+
+    box-shadow:
+      0 0 20px var(--glow-secondary),
+      0 10px 30px var(--shadow);
+  }
+
+  .label {
+    background:
+      rgba(255, 255, 255, 0.72);
+
+    border-color:
+      rgba(32, 37, 45, 0.1);
+
+    color:
+      var(--text);
+  }
+
+
+  /*  CONTACTS  */
+
+  .contacts-subtitle {
+    color: var(--muted);
+  }
+
+  .contact-card p,
+  .contact-card a {
+    color: var(--muted);
+  }
+
+  .contact-card a:hover {
+    color: var(--accent-2);
+  }
+
+
+  /*  MODAL  */
+
+  .modal-overlay {
+    background:
+      rgba(20, 25, 35, 0.35);
+  }
+
+  .modal {
+    background:
+      rgba(255, 255, 255, 0.82);
+
+    border-color:
+      rgba(32, 37, 45, 0.1);
+
+    color: var(--text);
+  }
+
+  .modal p {
+    color: var(--muted);
+  }
+
+  .modal-form input,
+  .modal-form textarea {
+    background:
+      rgba(255, 255, 255, 0.8);
+
+    border-color:
+      rgba(32, 37, 45, 0.12);
+
+    color: var(--text);
+  }
+
+
+  /*  COOKIE  */
+
+  .cookie__card {
+    background:
+      rgba(255, 255, 255, 0.9);
+
+    color: var(--text);
+
+    border-color:
+      rgba(32, 37, 45, 0.1);
+  }
+
+  .cookie__text {
+    color: var(--muted);
+  }
+
+  .cookie__link {
+    color: var(--accent-2);
+  }
+
+  .cookie__btn--reject {
+    border-color:
+      rgba(32, 37, 45, 0.18);
+
+    color:
+      var(--text);
+  }
+
+
+  /*  FOOTER  */
+
+  .footer {
+    background: linear-gradient(
+      to top,
+      rgba(237, 243, 250, 0.98),
+      rgba(247, 249, 252, 0.9)
+    );
+
+    border-top-color: var(--stroke);
+  }
+
+  .footer__brand h3 {
+    color: var(--text);
+  }
+
+  .footer__desc {
+    color: var(--muted);
+  }
+
+  .footer__meta,
+  .footer__cookies {
+    color:
+      rgba(32, 37, 45, 0.5);
+  }
+
+  .footer a {
+    color: var(--accent-2);
+  }
+
+
+  /*  PRICE  */
+
+  .price-section h2,
+  .price-section h3 {
+    color: var(--text);
+  }
+
+  .price-section h3 span {
+    color: var(--muted);
+  }
+
+  .price-table th {
+    background:
+      rgba(191, 217, 252, 0.38);
+
+    color: var(--text);
+  }
+
+  .price-table td {
+    color: var(--muted);
+
+    border-top-color:
+      var(--stroke);
+  }
+
+  .price-table td:last-child {
+    color: var(--accent-2);
+  }
+
+  .price-table tr:nth-child(even) {
+    background:
+      rgba(255, 255, 255, 0.35);
+  }
+
+  .price-table tr:hover {
+    background:
+      rgba(191, 217, 252, 0.18);
+  }
+
+  .price-section h2 {
+    background: var(--bg);
+  }
+
+
+  /*  POLITICS  */
+
+  .politics__card {
+    background:
+      rgba(255, 255, 255, 0.88);
+
+    border-color:
+      var(--stroke);
+  }
+
+  .politics h1,
+  .politics h2,
+  .politics h3 {
+    color: var(--accent-2);
+  }
+
+  .politics p,
+  .politics li {
+    color: var(--muted);
+  }
+
+  .politics strong {
+    color: var(--text);
+  }
+
+
+  /* 
+     MOBILE NAV ONLY
+      ВАЖНО:
+      этот фон применяется только при <= 992px.
+      На десктопе .nav прозрачен и использует стекло .navbar.
+  */
+
+  @media (max-width: 992px) {
+
+    .nav {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(247, 249, 252, 0.98),
+          rgba(237, 243, 250, 0.98)
+        );
+
+      border-left-color:
+        var(--stroke);
+
+      box-shadow:
+        -20px 0 60px
+        rgba(31, 41, 55, 0.12);
+    }
+
+
+    .burger {
+      background:
+        rgba(255, 255, 255, 0.65);
+
+      border-color:
+        var(--stroke);
+    }
+
+    .burger:hover {
+      background:
+        rgba(255, 255, 255, 0.9);
+
+      border-color:
+        rgba(167, 193, 252, 0.5);
+    }
+
+    .burger span {
+      background:
+        var(--text);
+    }
+  }
+
+
+  /*  SCROLL TOP  */
+
+  .scroll-top-btn {
+    background: linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+    color:
+      var(--button-text);
+
+    box-shadow:
+      0 10px 30px var(--shadow);
+  }
+
+
+  /*  HERO LIGHT  */
+
+  .hero-light {
+    background:
+      radial-gradient(
+        circle,
+        rgba(167, 193, 252, 0.3),
+        transparent 70%
+      );
+  }
+
+
+  /*  LOGO  */
+
+  .logo {
+    background: linear-gradient(
+      90deg,
+      var(--text),
+      var(--accent-2)
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+      0 0 20px var(--glow-secondary);
+  }
+
+  .logo-avatar {
+    border-color:
+      rgba(167, 193, 252, 0.55);
+
+    box-shadow:
+      0 0 18px
+      rgba(167, 193, 252, 0.25);
+  }
+
+
+  /*  FLOATING CTA  */
+
+  .cta-btn {
+    box-shadow:
+      0 10px 30px var(--shadow);
+  }
+
+
+  /*  OVERLAY  */
+
+  .nav-overlay {
+    background:
+      rgba(20, 25, 35, 0.22);
+  }
 }
 
-/*  RESPONSIVE  */
-// @media (min-width: 1600px) {
-//   .navbar .container {
-//     max-width: 1500px;
-//   }
 
-//   .nav {
-//     gap: 42px;
-//   }
-
-//   .logo {
-//     font-size: 34px;
-//   }
-// }
+/* RESPONSIVE — DESKTOP */
 
 @media (min-width: 993px) {
 
-  /* контейнер остаётся ограниченным */
   .navbar .container {
     width: 90%;
     max-width: 1300px;
+
     margin: 0 auto;
 
     display: flex;
     align-items: center;
   }
 
-  /* главный flex-контейнер */
   .navbar-content {
     width: 100%;
+
     display: flex;
     align-items: center;
-    justify-content: space-between; /* ВАЖНО: разносит по краям */
+    justify-content: space-between;
   }
 
-  /* логотип не сжимается */
   .logo {
     flex-shrink: 0;
   }
 
-  /* меню уходит вправо */
   .nav {
     margin-left: auto;
+
     display: flex;
     align-items: center;
+
     gap: 34px;
     flex-shrink: 0;
+
+    background: transparent !important;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .nav a {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  .nav a:hover {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
   }
 }
 
+
+/* RESPONSIVE — TABLET / MOBILE */
+
 @media (max-width: 768px) {
+
   .navbar-content {
     flex-direction: row;
+
     align-items: center;
     justify-content: space-between;
+
     gap: 20px;
-    
   }
 
   .hero {
@@ -412,5 +984,36 @@ nav a:hover {
 
   .hero p {
     font-size: 18px;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 480px) {
+
+  .container {
+    width: calc(100% - 32px);
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  h2 {
+    font-size: 34px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 16px 26px;
   }
 }

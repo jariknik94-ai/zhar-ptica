@@ -1,43 +1,69 @@
 .politics {
   min-height: 100vh;
+
   padding: 120px 0 80px;
 
   &__card {
     max-width: 1100px;
+
     margin: 0 auto;
+
     padding: 50px;
-    background: rgba(255, 255, 255, 0.95);
+
+    background: var(--politics-card);
+
+    border:
+      1px solid var(--politics-border);
+
     border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+
+    box-shadow:
+      0 20px 60px var(--politics-shadow);
+
     backdrop-filter: blur(12px);
+
+    transition:
+      background 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
   }
 
   h1 {
     text-align: center;
+
     margin-bottom: 50px;
+
     font-size: 2.5rem;
-    color: #d4a017;
+
+    color: var(--accent);
   }
 
   h2 {
     margin-top: 50px;
     margin-bottom: 20px;
-    color: #d4a017;
+
+    color: var(--accent);
+
     font-size: 1.8rem;
   }
 
   h3 {
     margin-top: 30px;
     margin-bottom: 12px;
-    color: #d4a017;
+
+    color: var(--accent);
+
     font-size: 1.2rem;
+
     font-weight: 700;
   }
 
   p {
     margin-bottom: 16px;
+
     line-height: 1.8;
-    color: #bbbbbb;
+
+    color: var(--politics-text);
   }
 
   ul {
@@ -46,16 +72,56 @@
 
   li {
     margin-bottom: 10px;
+
     line-height: 1.8;
-    color: #bbbbbb;
+
+    color: var(--politics-text);
   }
 
   strong {
-    color: #ffffff;
+    color: var(--text);
   }
 }
 
+
+/* DARK THEME */
+
+:root {
+  --politics-card:
+    rgba(255, 255, 255, 0.06);
+
+  --politics-border:
+    rgba(255, 255, 255, 0.08);
+
+  --politics-text:
+    rgba(255, 255, 255, 0.72);
+
+  --politics-shadow:
+    rgba(0, 0, 0, 0.35);
+}
+
+
+/* LIGHT THEME */
+
+[data-theme='light'] {
+  --politics-card:
+    rgba(255, 255, 255, 0.92);
+
+  --politics-border:
+    rgba(31, 41, 55, 0.08);
+
+  --politics-text:
+    rgba(31, 41, 55, 0.78);
+
+  --politics-shadow:
+    rgba(65, 52, 35, 0.12);
+}
+
+
+/* RESPONSIVE */
+
 @media (max-width: 768px) {
+
   .politics {
     padding: 100px 0 50px;
 

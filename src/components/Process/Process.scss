@@ -2,67 +2,168 @@
   padding: 130px 0;
 }
 
-/* сетка шагов */
+
+/* STEPS GRID */
+
 .steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(240px, 1fr));
 
   gap: 25px;
+
   margin-top: 50px;
 }
 
-/* карточка шага */
+
+/* STEP CARD */
+
 .step {
-  background: rgba(255,255,255,0.05);
+  background:
+    var(--process-card-bg);
+
+  border:
+    1px solid var(--process-card-border);
 
   border-radius: 24px;
+
   padding: 35px;
 
-  backdrop-filter: blur(14px);
+  backdrop-filter:
+    blur(14px);
 
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease,
-    background 0.35s ease;
+    background 0.35s ease,
+    border-color 0.35s ease;
 
   will-change: transform;
 }
 
-/* hover */
-.step:hover {
-  transform: translateY(-10px) scale(1.02);
 
-  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+/* HOVER */
+
+.step:hover {
+  transform:
+    translateY(-10px) scale(1.02);
+
+  background:
+    var(--process-card-hover-bg);
+
+  border-color:
+    var(--process-card-hover-border);
+
+  box-shadow:
+    0 30px 70px var(--process-card-shadow);
 }
 
-/* номер */
+
+/* NUMBER */
+
 .step span {
   font-size: 54px;
+
   font-weight: 800;
 
+  color:
+    var(--process-number);
+
   opacity: 0.25;
+
+  transition:
+    color 0.35s ease;
 }
 
-/* заголовок */
+
+/* TITLE */
+
 .step h3 {
   margin-top: 18px;
+
   font-size: 24px;
+
+  color:
+    var(--process-title);
+
+  transition:
+    color 0.35s ease;
 }
 
-/*  RESPONSIVE  */
+
+/* DARK THEME */
+
+:root {
+
+  --process-card-bg:
+    rgba(255, 255, 255, 0.05);
+
+  --process-card-border:
+    rgba(255, 255, 255, 0.08);
+
+  --process-card-hover-bg:
+    rgba(255, 255, 255, 0.08);
+
+  --process-card-hover-border:
+    rgba(249, 115, 22, 0.25);
+
+  --process-card-shadow:
+    rgba(0, 0, 0, 0.45);
+
+  --process-number:
+    #ffffff;
+
+  --process-title:
+    #ffffff;
+}
+
+
+/* LIGHT THEME */
+
+[data-theme='light'] {
+
+  --process-card-bg:
+    rgba(255, 255, 255, 0.68);
+
+  --process-card-border:
+    rgba(31, 41, 55, 0.1);
+
+  --process-card-hover-bg:
+    rgba(255, 255, 255, 0.9);
+
+  --process-card-hover-border:
+    rgba(167, 193, 252, 0.7);
+
+  --process-card-shadow:
+    rgba(65, 52, 35, 0.14);
+
+  --process-number:
+    #1f2937;
+
+  --process-title:
+    #1f2937;
+}
+
+
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
+
   .process {
     padding: 90px 0;
   }
+
 
   .step {
     padding: 28px;
   }
 
+
   .step span {
     font-size: 42px;
   }
+
 
   .step h3 {
     font-size: 20px;

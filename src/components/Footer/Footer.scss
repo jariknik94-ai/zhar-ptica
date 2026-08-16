@@ -1,94 +1,217 @@
 .footer {
   padding: 30px 0;
+
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(
-    to top,
-    rgba(7, 17, 31, 0.95),
-    rgba(7, 17, 31, 0.75)
-  );
-  backdrop-filter: blur(10px);
+
+  border-top:
+    1px solid var(--footer-border);
+
+  background:
+    linear-gradient(
+      to top,
+      var(--footer-bg-bottom),
+      var(--footer-bg-top)
+    );
+
+  backdrop-filter:
+    blur(10px);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
 
-/* контейнер */
+
+/* FOOTER INNER */
+
 .footer__inner {
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
   gap: 5px;
 }
 
-/* бренд */
+
+/* BRAND */
+
 .footer__brand h3 {
   font-size: 20px;
+
   font-weight: 600;
+
   letter-spacing: 1px;
-  color: #ffffff;
+
+  color: var(--footer-title);
+
   margin-bottom: 6px;
+
+  transition:
+    color 0.35s ease;
 }
 
-/* описание */
+
+/* DESCRIPTION */
+
 .footer__desc {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+
+  color: var(--footer-desc);
+
   letter-spacing: 0.3px;
+
+  transition:
+    color 0.35s ease;
 }
 
-/* мета */
+
+/* META */
+
 .footer__meta {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.45);
+
+  color: var(--footer-meta);
+
+  transition:
+    color 0.35s ease;
 }
 
-/* cookies блок */
+
+/* COOKIES */
+
 .footer__cookies {
   max-width: 900px;
+
   font-size: 11px;
+
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.45);
+
+  color: var(--footer-meta);
+
   margin-top: 20px;
+
+  transition:
+    color 0.35s ease;
 }
 
-/* ссылки */
+
+/* LINKS */
+
 .footer a {
-  color: #d4a017;
+  color: var(--accent);
+
   text-decoration: none;
+
   position: relative;
-  transition: 0.3s ease;
+
+  transition:
+    color 0.3s ease;
 }
+
 
 .footer a::after {
-  content: "";
+  content: '';
+
   position: absolute;
+
   left: 0;
   bottom: -2px;
+
   width: 100%;
   height: 1px;
-  background: rgba(212, 160, 23, 0.4);
-  transition: 0.3s ease;
+
+  background:
+    var(--accent);
+
+  opacity: 0.4;
+
+  transition:
+    background 0.3s ease,
+    opacity 0.3s ease;
 }
+
 
 .footer a:hover {
-  color: #f5c542;
+  color: var(--accent-2);
 }
+
 
 .footer a:hover::after {
-  background: rgba(245, 197, 66, 0.8);
+  background:
+    var(--accent-2);
+
+  opacity: 0.8;
 }
 
+
+/* DARK THEME */
+
+:root {
+
+  --footer-border:
+    rgba(255, 255, 255, 0.08);
+
+  --footer-bg-bottom:
+    rgba(7, 17, 31, 0.95);
+
+  --footer-bg-top:
+    rgba(7, 17, 31, 0.75);
+
+  --footer-title:
+    #ffffff;
+
+  --footer-desc:
+    rgba(255, 255, 255, 0.6);
+
+  --footer-meta:
+    rgba(255, 255, 255, 0.45);
+}
+
+
+/* LIGHT THEME */
+
+[data-theme='light'] {
+
+  --footer-border:
+    rgba(41, 39, 36, 0.1);
+
+  --footer-bg-bottom:
+    rgba(238, 232, 222, 0.95);
+
+  --footer-bg-top:
+    rgba(247, 243, 237, 0.85);
+
+  --footer-title:
+    #292724;
+
+  --footer-desc:
+    rgba(41, 39, 36, 0.68);
+
+  --footer-meta:
+    rgba(41, 39, 36, 0.48);
+}
+
+
 /* RESPONSIVE */
+
 @media (max-width: 768px) {
+
   .footer {
     padding: 50px 0;
   }
+
 
   .footer__brand h3 {
     font-size: 18px;
   }
 
+
   .footer__desc {
     font-size: 13px;
   }
+
 
   .footer__cookies {
     font-size: 10px;

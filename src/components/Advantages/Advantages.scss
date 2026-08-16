@@ -2,105 +2,207 @@
   padding: 130px 0;
 }
 
+
+/* GRID */
+
 .advantages-grid {
   margin-top: 60px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(300px, 1fr));
 
   gap: 30px;
 }
 
-/* карточка */
-.advantage-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
 
-  backdrop-filter: blur(18px);
+/* CARD */
+
+.advantage-card {
+  background:
+    var(--advantage-card-bg);
+
+  border:
+    1px solid var(--advantage-card-border);
+
+  backdrop-filter:
+    blur(18px);
 
   border-radius: 28px;
+
   padding: 35px;
 
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease,
-    background 0.35s ease;
+    background 0.35s ease,
+    border-color 0.35s ease;
 
   will-change: transform;
 }
 
-/* hover */
+
+/* HOVER */
+
 .advantage-card:hover {
-  transform: translateY(-10px) scale(1.02);
+  transform:
+    translateY(-10px) scale(1.02);
 
-  background: rgba(255,255,255,0.09);
+  background:
+    var(--advantage-card-hover-bg);
 
-  border: 1px solid rgba(249,115,22,0.25);
+  border-color:
+    var(--advantage-card-hover-border);
 
-  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+  box-shadow:
+    0 30px 70px var(--advantage-card-shadow);
 }
 
-/* иконка */
+
+/* ICON */
+
 .advantage-card .icon {
   font-size: 48px;
+
   margin-bottom: 25px;
 
-  color: #f59e0b;
+  color:
+    var(--accent);
+
+  transition:
+    color 0.35s ease;
 }
 
-/* заголовок */
+
+/* TITLE */
+
 .advantage-card h3 {
   font-size: 26px;
+
   margin-bottom: 18px;
+
+  color:
+    var(--advantage-title);
+
+  transition:
+    color 0.35s ease;
 }
 
-/* текст */
+
+/* TEXT */
+
 .advantage-card p {
   line-height: 1.8;
-  color: rgba(255,255,255,0.72);
+
+  color:
+    var(--advantage-text);
+
+  transition:
+    color 0.35s ease;
 }
 
-/*  RESPONSIVE  */
 
-@media (max-width: 768px) {
-  .advantages {
-    padding: 90px 0;
-  }
+/* DARK THEME */
 
-  .advantage-card {
-    padding: 28px;
-  }
+:root {
+
+  --advantage-card-bg:
+    rgba(255, 255, 255, 0.06);
+
+  --advantage-card-border:
+    rgba(255, 255, 255, 0.08);
+
+  --advantage-card-hover-bg:
+    rgba(255, 255, 255, 0.09);
+
+  --advantage-card-hover-border:
+    rgba(249, 115, 22, 0.25);
+
+  --advantage-card-shadow:
+    rgba(0, 0, 0, 0.45);
+
+  --advantage-title:
+    #ffffff;
+
+  --advantage-text:
+    rgba(255, 255, 255, 0.72);
 }
-/*  RESPONSIVE CARDS  */
+
+
+/* LIGHT THEME */
+
+[data-theme='light'] {
+
+  --advantage-card-bg:
+    rgba(255, 255, 255, 0.68);
+
+  --advantage-card-border:
+    rgba(31, 41, 55, 0.1);
+
+  --advantage-card-hover-bg:
+    rgba(255, 255, 255, 0.9);
+
+  --advantage-card-hover-border:
+    rgba(167, 193, 252, 0.7);
+
+  --advantage-card-shadow:
+    rgba(65, 52, 35, 0.14);
+
+  --advantage-title:
+    #1f2937;
+
+  --advantage-text:
+    rgba(31, 41, 55, 0.72);
+}
+
+
+/* RESPONSIVE — 992px */
 
 @media (max-width: 992px) {
 
   .advantages-grid {
-    grid-template-columns: repeat(
-      2,
-      minmax(0, 1fr)
-    );
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
   }
 }
 
+
+/* RESPONSIVE — 768px */
+
 @media (max-width: 768px) {
 
-  .advantages-grid{
+  .advantages {
+    padding: 90px 0;
+  }
+
+
+  .advantages-grid {
     grid-template-columns: 1fr;
+
     gap: 22px;
   }
+
 
   .advantage-card {
     padding: 28px;
   }
 }
 
+
+/* RESPONSIVE — 480px */
+
 @media (max-width: 480px) {
 
-  .advantage-card{
+  .advantage-card {
     padding: 22px;
+
     border-radius: 22px;
   }
+
 
   .advantage-card h3 {
     font-size: 22px;

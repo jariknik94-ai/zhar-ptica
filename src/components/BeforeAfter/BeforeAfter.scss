@@ -4,15 +4,21 @@
   text-align: center;
 }
 
-/* subtitle */
+
+/* SUBTITLE */
+
 .subtitle {
   margin-top: 15px;
   margin-bottom: 50px;
 
-  color: rgba(255,255,255,0.65);
+  color: var(--ba-muted);
+
+  transition: color 0.35s ease;
 }
 
-/* wrapper */
+
+/* WRAPPER */
+
 .ba-wrapper {
   position: relative;
 
@@ -25,10 +31,16 @@
 
   overflow: hidden;
 
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  box-shadow:
+    0 20px 60px var(--ba-shadow);
+
+  transition:
+    box-shadow 0.35s ease;
 }
 
-/* images */
+
+/* IMAGES */
+
 .ba-image {
   width: 100%;
   height: 500px;
@@ -41,7 +53,9 @@
   pointer-events: none;
 }
 
-/* overlay */
+
+/* OVERLAY */
+
 .ba-overlay {
   position: absolute;
 
@@ -49,10 +63,13 @@
 
   z-index: 2;
 
-  transition: clip-path 0.05s linear;
+  transition:
+    clip-path 0.05s linear;
 }
 
-/* divider */
+
+/* DIVIDER */
+
 .ba-divider {
   position: absolute;
 
@@ -61,45 +78,63 @@
 
   width: 2px;
 
-  background: rgba(255,255,255,0.9);
+  background:
+    var(--ba-divider);
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   z-index: 5;
 
   box-shadow:
-    0 0 20px rgba(255,255,255,0.35),
-    0 0 40px rgba(245,158,11,0.25);
+    0 0 20px var(--ba-divider-glow),
+    0 0 40px var(--ba-accent-glow);
+
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-/* handle */
+
+/* HANDLE */
+
 .ba-handle {
   position: absolute;
 
   top: 50%;
   left: 50%;
 
-  transform: translate(-50%, -50%);
+  transform:
+    translate(-50%, -50%);
 
   width: 42px;
   height: 42px;
 
   border-radius: 50%;
 
-  background: linear-gradient(
-    135deg,
-    #f59e0b,
-    #f97316
-  );
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
 
-  border: 3px solid white;
+  border:
+    3px solid var(--ba-handle-border);
 
   box-shadow:
-    0 0 20px rgba(245,158,11,0.45),
-    0 10px 30px rgba(0,0,0,0.35);
+    0 0 20px var(--ba-handle-glow),
+    0 10px 30px var(--ba-handle-shadow);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-/* invisible slider */
+
+/* INVISIBLE SLIDER */
+
 .ba-slider {
   position: absolute;
 
@@ -115,7 +150,9 @@
   z-index: 10;
 }
 
-/* labels */
+
+/* LABELS */
+
 .label {
   position: absolute;
 
@@ -125,24 +162,118 @@
 
   font-size: 14px;
 
-  background: rgba(0,0,0,0.4);
+  color:
+    var(--ba-label-text);
 
-  border: 1px solid rgba(255,255,255,0.1);
+  background:
+    var(--ba-label-bg);
+
+  border:
+    1px solid var(--ba-label-border);
 
   border-radius: 10px;
 
   z-index: 6;
+
+  backdrop-filter:
+    blur(8px);
+
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
+
 
 .label.before {
   left: 20px;
 }
 
+
 .label.after {
   right: 20px;
 }
 
-/*  RESPONSIVE  */
+
+/* DARK THEME */
+
+:root {
+
+  --ba-muted:
+    rgba(255, 255, 255, 0.65);
+
+  --ba-shadow:
+    rgba(0, 0, 0, 0.4);
+
+  --ba-divider:
+    rgba(255, 255, 255, 0.9);
+
+  --ba-divider-glow:
+    rgba(255, 255, 255, 0.35);
+
+  --ba-accent-glow:
+    rgba(245, 158, 11, 0.25);
+
+  --ba-handle-border:
+    #ffffff;
+
+  --ba-handle-glow:
+    rgba(245, 158, 11, 0.45);
+
+  --ba-handle-shadow:
+    rgba(0, 0, 0, 0.35);
+
+  --ba-label-text:
+    #ffffff;
+
+  --ba-label-bg:
+    rgba(0, 0, 0, 0.4);
+
+  --ba-label-border:
+    rgba(255, 255, 255, 0.1);
+}
+
+
+/* LIGHT THEME */
+
+[data-theme='light'] {
+
+  --ba-muted:
+    rgba(31, 41, 55, 0.68);
+
+  --ba-shadow:
+    rgba(65, 52, 35, 0.18);
+
+  --ba-divider:
+    rgba(31, 41, 55, 0.75);
+
+  --ba-divider-glow:
+    rgba(255, 255, 255, 0.7);
+
+  --ba-accent-glow:
+    rgba(167, 193, 252, 0.45);
+
+  --ba-handle-border:
+    #ffffff;
+
+  --ba-handle-glow:
+    rgba(167, 193, 252, 0.6);
+
+  --ba-handle-shadow:
+    rgba(65, 52, 35, 0.25);
+
+  --ba-label-text:
+    #1f2937;
+
+  --ba-label-bg:
+    rgba(255, 255, 255, 0.78);
+
+  --ba-label-border:
+    rgba(31, 41, 55, 0.12);
+}
+
+
+/* RESPONSIVE — 992px */
 
 @media (max-width: 992px) {
 
@@ -151,25 +282,32 @@
   }
 }
 
+
+/* RESPONSIVE — 768px */
+
 @media (max-width: 768px) {
 
   .before-after {
     padding: 90px 0;
   }
 
+
   .ba-wrapper {
     border-radius: 22px;
   }
 
+
   .ba-image {
     height: 340px;
   }
+
 
   .label {
     font-size: 12px;
 
     padding: 5px 10px;
   }
+
 
   .ba-handle {
     width: 34px;
@@ -177,24 +315,32 @@
   }
 }
 
+
+/* RESPONSIVE — 480px */
+
 @media (max-width: 480px) {
 
   .ba-image {
     height: 260px;
   }
 
+
   .label {
     font-size: 12px;
+
     padding: 5px 10px;
   }
+
 
   .label.before {
     left: 12px;
   }
 
+
   .label.after {
     right: 12px;
   }
+
 
   .ba-handle {
     width: 30px;

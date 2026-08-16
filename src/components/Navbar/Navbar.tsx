@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './Navbar.scss'
 
-type NavbarType = 'main' | 'price'| 'politics'
+type NavbarType = 'main' | 'price' | 'politics'
+type Theme = 'dark' | 'light'
 
 function Navbar({ type = 'main' }: { type?: NavbarType }) {
   const navigate = useNavigate()
@@ -11,14 +12,37 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState('home')
 
+  // THEME
+  const [theme, setTheme] = useState<Theme>(() => {
+    const savedTheme = localStorage.getItem('theme')
+
+    return savedTheme === 'light' ? 'light' : 'dark'
+  })
+
   const navRef = useRef<HTMLDivElement | null>(null)
 
   const isPrice = type === 'price'
   const isPolitics = type === 'politics'
 
+  // APPLY THEME
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  // TOGGLE THEME
+  const toggleTheme = () => {
+    setTheme((currentTheme) =>
+      currentTheme === 'dark' ? 'light' : 'dark'
+    )
+
+    setMenuOpen(false)
+  }
+
   // LOCK SCROLL
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
+
     return () => {
       document.body.style.overflow = ''
     }
@@ -27,20 +51,32 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
   // OUTSIDE CLICK
   useEffect(() => {
     const handleOutside = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+      if (
+        navRef.current &&
+        !navRef.current.contains(e.target as Node)
+      ) {
         setMenuOpen(false)
       }
     }
 
-    if (menuOpen) document.addEventListener('mousedown', handleOutside)
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleOutside)
+    }
 
-    return () => document.removeEventListener('mousedown', handleOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleOutside)
+    }
   }, [menuOpen])
 
   // SCROLL FUNCTION
   const scrollTo = (id: string) => {
     const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+
+    if (el) {
+      el.scrollIntoView({
+        behavior: 'smooth',
+      })
+    }
   }
 
   const goHome = () => {
@@ -53,13 +89,16 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
 
     if (location.pathname !== '/') {
       navigate('/')
-      setTimeout(() => scrollTo(id), 100)
+
+      setTimeout(() => {
+        scrollTo(id)
+      }, 100)
     } else {
       scrollTo(id)
     }
   }
 
-  // ACTIVE SCROLL SPY (ТОЛЬКО ДЛЯ MAIN)
+  // ACTIVE SCROLL SPY
   useEffect(() => {
     if (isPrice || isPolitics) return
 
@@ -82,7 +121,10 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
         if (el) {
           const rect = el.getBoundingClientRect()
 
-          if (rect.top <= 120 && rect.bottom >= 120) {
+          if (
+            rect.top <= 120 &&
+            rect.bottom >= 120
+          ) {
             current = id
           }
         }
@@ -93,8 +135,10 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
 
     window.addEventListener('scroll', handleScroll)
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [isPrice])
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isPrice, isPolitics])
 
   return (
     <>
@@ -104,72 +148,102 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
       />
 
       <header className="navbar">
-        <div className="container navbar-content" ref={navRef}>
+        <div
+          className="container navbar-content"
+          ref={navRef}
+        >
 
           {/* LOGO */}
-          <div className="logo" onClick={goHome} style={{ cursor: 'pointer' }}>
-            <img className="logo-avatar" src="/favicon.png" />
+          <div
+            className="logo"
+            onClick={goHome}
+            style={{ cursor: 'pointer' }}
+          >
+            <img
+              className="logo-avatar"
+              src="/favicon.png"
+              alt="Жар-птица"
+            />
+
             Жар птица
           </div>
-
-          {/* BURGER */}
-          <button
-            className={`burger ${menuOpen ? 'active' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
 
           {/* MAIN NAV */}
           {!isPrice && !isPolitics && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
 
               <a
-                className={active === 'home' ? 'active-link' : ''}
+                className={
+                  active === 'home'
+                    ? 'active-link'
+                    : ''
+                }
                 onClick={() => goToSection('home')}
               >
                 Главная
               </a>
 
               <a
-                className={active === 'services' ? 'active-link' : ''}
+                className={
+                  active === 'services'
+                    ? 'active-link'
+                    : ''
+                }
                 onClick={() => goToSection('services')}
               >
                 Услуги
               </a>
 
               <a
-                className={active === 'advantages' ? 'active-link' : ''}
+                className={
+                  active === 'advantages'
+                    ? 'active-link'
+                    : ''
+                }
                 onClick={() => goToSection('advantages')}
               >
                 Преимущества
               </a>
 
               <a
-                className={active === 'process' ? 'active-link' : ''}
+                className={
+                  active === 'process'
+                    ? 'active-link'
+                    : ''
+                }
                 onClick={() => goToSection('process')}
               >
                 Процесс
               </a>
 
               <a
-                className={active === 'reviews' ? 'active-link' : ''}
+                className={
+                  active === 'reviews'
+                    ? 'active-link'
+                    : ''
+                }
                 onClick={() => goToSection('reviews')}
               >
                 Отзывы
               </a>
 
-              {<a
-                className={active === 'price' ? 'active-link' : ''}
+              <a
+                className={
+                  active === 'price'
+                    ? 'active-link'
+                    : ''
+                }
                 onClick={() => navigate('/price')}
               >
                 Прайс
-              </a>}
+              </a>
 
               <a
-                className={active === 'contacts' ? 'active-link' : ''}
+                className={
+                  active === 'contacts'
+                    ? 'active-link'
+                    : ''
+                }
                 onClick={() => goToSection('contacts')}
               >
                 Контакты
@@ -182,36 +256,94 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
           {isPrice && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
 
-              <a onClick={goHome}>Главная</a>
+              <a onClick={goHome}>
+                Главная
+              </a>
 
-              <a className="active-link">Прайс</a>
+              <a className="active-link">
+                Прайс
+              </a>
+
               <a
                 onClick={() => {
                   navigate('/')
-                  setTimeout(() => scrollTo('contacts'), 100)
-                }}>
+                  setTimeout(() => {
+                    scrollTo('contacts')
+                  }, 100)
+                }}
+              >
                 Контакты
               </a>
 
             </nav>
           )}
-          {/* Politics NAV */}
-          {isPolitics  && (
+
+          {/* POLITICS NAV */}
+          {isPolitics && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+
               <a onClick={goHome}>
                 Главная
               </a>
+
               <a
-                className={active === 'price' ? 'active-link' : ''}
-                onClick={() => navigate('/price')}>
+                className={
+                  active === 'price'
+                    ? 'active-link'
+                    : ''
+                }
+                onClick={() => navigate('/price')}
+              >
                 Прайс
               </a>
+
               <a className="active-link">
                 Политика
               </a>
-              
+
             </nav>
           )}
+
+          {/* THEME TOGGLE */}
+          <button
+            type="button"
+            className={`theme-toggle ${
+              theme === 'light'
+                ? 'theme-toggle--light'
+                : 'theme-toggle--dark'
+            }`}
+            onClick={toggleTheme}
+            aria-label={
+              theme === 'dark'
+                ? 'Включить светлую тему'
+                : 'Включить тёмную тему'
+            }
+          >
+            <span className="theme-toggle__track">
+              <span className="theme-toggle__icon">
+                {theme === 'dark' ? '☾' : '☀'}
+              </span>
+            </span>
+          </button>
+
+          {/* BURGER */}
+          <button
+            type="button"
+            className={`burger ${
+              menuOpen ? 'active' : ''
+            }`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={
+              menuOpen
+                ? 'Закрыть меню'
+                : 'Открыть меню'
+            }
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
         </div>
       </header>
     </>

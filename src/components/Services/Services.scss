@@ -2,93 +2,128 @@
   padding: 130px 0;
 }
 
+
+/* GRID */
+
 .services-grid {
   margin-top: 60px;
+
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
   gap: 30px;
 }
 
-/* карточка услуги */
+
+/* CARD */
+
 .service-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--card);
+
+  border:
+    1px solid var(--stroke);
 
   backdrop-filter: blur(18px);
+
   border-radius: 28px;
 
   padding: 35px;
 
-  transition: 0.45s ease;
+  transition:
+    transform 0.45s ease,
+    background 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+
   will-change: transform;
 }
 
-/* hover эффект */
+
+/* HOVER */
+
 .service-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  background: rgba(255,255,255,0.09);
-  border: 1px solid rgba(249,115,22,0.25);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  transform:
+    translateY(-10px) scale(1.02);
+
+  background:
+    var(--card-hover);
+
+  border-color:
+    var(--accent-border);
+
+  box-shadow:
+    0 25px 60px var(--card-shadow);
 }
 
-/* иконка */
+
+/* ICON */
+
 .icon {
   font-size: 48px;
+
   margin-bottom: 25px;
-  color: #f59e0b;
+
+  color:
+    var(--accent);
 }
 
-/* заголовок */
+
+/* TITLE */
+
 .service-card h3 {
   font-size: 26px;
+
   margin-bottom: 18px;
+
+  color:
+    var(--text);
 }
 
-/* текст */
+
+/* TEXT */
+
 .service-card p {
-  color: rgba(255,255,255,0.72);
+  color:
+    var(--muted);
+
   line-height: 1.8;
 }
 
-/*  RESPONSIVE  */
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+
+  .services-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
 
 @media (max-width: 768px) {
+
   .services {
     padding: 90px 0;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+
+    gap: 22px;
   }
 
   .service-card {
     padding: 28px;
   }
 }
-/*  RESPONSIVE CARDS  */
 
-@media (max-width: 992px) {
-
-  .services-grid{
-    grid-template-columns: repeat(
-      2,
-      minmax(0, 1fr)
-    );
-  }
-}
-
-@media (max-width: 768px) {
-
-  .services-grid{
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-
-  .service-card{
-    padding: 28px;
-  }
-}
 
 @media (max-width: 480px) {
 
-  .service-card{
+  .service-card {
     padding: 22px;
+
     border-radius: 22px;
   }
 
