@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import Home from './pages/Home/Home.tsx'
 import PricePage from './pages/PricePage/PricePage.tsx'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
-import Politics from "./pages/Politics/Politics";
+import Politics from './pages/Politics/Politics'
 import CookiePopup from './components/CookiePopup/CookiePopup'
+import BookingModal from './components/BookingModal/BookingModal'
 
 
 function AppContent() {
-
-
   return (
     <>
       <ScrollToTop />
@@ -20,8 +20,10 @@ function AppContent() {
       </Routes>
 
       <CookiePopup />
+
+      <BookingModal />
     </>
-  );
+  )
 }
 
 function App() {
@@ -32,4 +34,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

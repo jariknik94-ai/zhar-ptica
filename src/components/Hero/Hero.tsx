@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import BookingModal from '../BookingModal/BookingModal'
 import Reveal from '../Reveal/Reveal'
 import './Hero.scss'
 
 function Hero() {
-  const [open, setOpen] = useState(false)
   const [offset, setOffset] = useState(0)
 
 
@@ -69,11 +67,6 @@ useEffect(() => {
         </Reveal>
 
       </div>
-
-      <BookingModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-      />
 
     </section>
   )
