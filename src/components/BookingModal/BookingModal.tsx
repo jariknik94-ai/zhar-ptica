@@ -300,7 +300,7 @@ function BookingPopup() {
 
           <input
             type='tel'
-            placeholder='+7-(999)-999-99-99 *'
+            placeholder='+7-(___)-___-__-__ *'
             value={phone}
             onChange={handlePhoneChange}
             disabled={isSubmitting}
