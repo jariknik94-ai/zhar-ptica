@@ -5,7 +5,7 @@ import PricePage from './pages/PricePage/PricePage.tsx'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import Politics from './pages/Politics/Politics'
 import CookiePopup from './components/CookiePopup/CookiePopup'
-// import BookingModal from './components/BookingModal/BookingModal'
+import BookingModal from './components/BookingModal/BookingModal'
 
 
 function AppContent() {
@@ -21,7 +21,7 @@ function AppContent() {
 
       <CookiePopup />
 
-      {/* <BookingModal />} */}
+      <BookingModal />
     </>
   )
 }

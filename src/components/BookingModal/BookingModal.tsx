@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react'
 import './BookingModal.scss'
 
-const PHONE_MASK = /^\+7-\(\d{3}\)-\d{3}-\d{2}-\d{2}$/
+const PHONE_MASK =
+  /^\+7-\(\d{3}\)-\d{3}-\d{2}-\d{2}$/
 
 /**
  * Форматирование российского номера телефона.
@@ -72,6 +73,8 @@ function BookingPopup() {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [comment, setComment] = useState('')
+  const [isPersonalDataAccepted, setIsPersonalDataAccepted] =
+    useState(false)
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -151,6 +154,20 @@ function BookingPopup() {
   }
 
   /**
+   * Обработка согласия на обработку
+   * персональных данных.
+   */
+  const handleConsentChange = (
+    event: ChangeEvent<HTMLInputElement>,
+  ) => {
+    setIsPersonalDataAccepted(event.target.checked)
+
+    if (error) {
+      setError('')
+    }
+  }
+
+  /**
    * Отправка заявки.
    */
   const handleSubmit = async (
@@ -194,6 +211,17 @@ function BookingPopup() {
       return
     }
 
+    /**
+     * Согласие на обработку персональных данных
+     * обязательно.
+     */
+    if (!isPersonalDataAccepted) {
+      setError(
+        'Необходимо согласиться на обработку персональных данных',
+      )
+      return
+    }
+
     try {
       setIsSubmitting(true)
 
@@ -232,10 +260,10 @@ function BookingPopup() {
        * Заявка успешно отправлена.
        */
       setIsSuccess(true)
-
       setName('')
       setPhone('')
       setComment('')
+      setIsPersonalDataAccepted(false)
     } catch (error) {
       console.error('Booking error:', error)
 
@@ -317,6 +345,37 @@ function BookingPopup() {
             onChange={handleCommentChange}
             disabled={isSubmitting}
           />
+
+          <label className='booking-popup__consent'>
+            <input
+              className='booking-popup__consent-input'
+              type='checkbox'
+              checked={isPersonalDataAccepted}
+              onChange={handleConsentChange}
+              disabled={isSubmitting}
+              required
+              aria-required='true'
+            />
+
+            <span
+              className='booking-popup__consent-checkbox'
+              aria-hidden='true'
+            />
+
+            <span className='booking-popup__consent-text'>
+              Я согласен (-на) на обработку{' '}
+              <a
+                href='/politics'
+                target='_blank'
+                rel='noopener noreferrer'
+                onClick={(event) =>
+                  event.stopPropagation()
+                }
+              >
+                персональных данных
+              </a>
+            </span>
+          </label>
 
           {error && (
             <p
