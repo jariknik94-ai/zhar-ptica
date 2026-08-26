@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
-//Test GitHub Actions
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🕊️ Ателье «Жар птица» (Frontend & Backend)
 
-Currently, two official plugins are available:
+Веб-приложение современного ателье по индивидуальному пошиву одежды с интерактивной формой заявки, поддержкой светлой/темной тем оформления и интеграцией с MAX Bot API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Основные возможности
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Интерактивная форма заявки (`BookingModal`):** Автоматическое появление через 3 секунды, маска ввода номера телефона (`+7-(___)-___-__-__`), валидация полей и обработка статусов отправки.
+* **Интеграция с MAX Bot API:** Безопасная отправка заявок с именем, телефоном и комментариями клиентов через бэкенд-сервер.
+* **Переключение тем:** Полноценная поддержка тёмной и светлой тем оформления с сохранением выбора пользователя в `localStorage`.
+* **Адаптивный дизайн:** Полная оптимизация под мобильные устройства, планшеты и десктопы.
+* **SEO и Аналитика:** Настроенная микроразметка, подключенные Yandex.Metrika, Google Analytics и IndexNow.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Технологический стек
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* **Frontend:** React, TypeScript, Vite, SCSS (Sass), Glassmorphism (с поддержкой `-webkit-backdrop-filter`).
+* **Backend:** Node.js, Express (`server/server.js`), Dotenv для защиты секретных данных (`.env`).
+* **Деплой и CI/CD:** GitHub Actions для автоматической выкатки на VPS.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚙️ Установка и локальный запуск
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone [https://github.com/jariknik94-ai/zhar-ptica.git](https://github.com/jariknik94-ai/zhar-ptica.git)
+   cd zhar-ptica
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. **Установите зависимости клиента:**
+   ```bash
+   npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. **Настройте переменные окружения:** 
+    Создайте файл `.env` в папке `server/` и добавьте туда необходимые ключи (например, токен для MAX Bot API).
+
+4. **Запуск в режиме разработки (Dev):**
+   ```bash
+   npm run dev
+
+5. **Сборка проекта (Production Build):**
+   ```bash
+   npm run build
+   npm run preview
+
+---
+
+## 📄 Лицензия
+Проект защищен внутренними правилами ателье «Жар птица».
