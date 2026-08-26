@@ -1,20 +1,21 @@
+/* Отступы при скролле с учетом фиксированной шапки */
 #home,
 #services,
 #advantages,
 #process,
 #reviews,
 #before-after,
+#price,
 #contacts {
   scroll-margin-top: 120px;
 }
 
-/* общий flow страницы */
+/* Общий flow страницы */
 .home-page {
   overflow: hidden;
 }
 
-/*  RESPONSIVE  */
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
   #home,
   #services,
@@ -22,6 +23,7 @@
   #process,
   #reviews,
   #before-after,
+  #price,
   #contacts {
     scroll-margin-top: 140px;
   }

@@ -2,31 +2,23 @@ import { useEffect, useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react'
 import './BookingModal.scss'
 
-const PHONE_MASK =
-  /^\+7-\(\d{3}\)-\d{3}-\d{2}-\d{2}$/
+const PHONE_MASK = /^\+7-\(\d{3}\)-\d{3}-\d{2}-\d{2}$/
 
 /**
  * Форматирование российского номера телефона.
- *
- * Результат:
- * +7-(999)-999-99-99
+ * Результат: +7-(999)-999-99-99
  */
 function formatPhone(value: string): string {
   let digits = value.replace(/\D/g, '')
 
-  // Если пользователь начинает ввод с 8:
-  // 8 999 999 99 99 → +7-(999)-999-99-99
   if (digits.startsWith('8')) {
     digits = `7${digits.slice(1)}`
   }
 
-  // Если пользователь вводит номер без 7:
-  // 9999999999 → +7-(999)-999-99-99
   if (!digits.startsWith('7')) {
     digits = `7${digits}`
   }
 
-  // Российский номер содержит 11 цифр вместе с 7
   digits = digits.slice(0, 11)
 
   const operatorCode = digits.slice(1, 4)
@@ -36,200 +28,89 @@ function formatPhone(value: string): string {
 
   let result = '+7'
 
-  if (operatorCode) {
-    result += `-(${operatorCode}`
-  }
-
-  if (digits.length >= 4) {
-    result += ')'
-  }
-
-  if (firstPart) {
-    result += `-${firstPart}`
-  }
-
-  if (secondPart) {
-    result += `-${secondPart}`
-  }
-
-  if (thirdPart) {
-    result += `-${thirdPart}`
-  }
+  if (operatorCode) result += `-(${operatorCode}`
+  if (digits.length >= 4) result += ')'
+  if (firstPart) result += `-${firstPart}`
+  if (secondPart) result += `-${secondPart}`
+  if (thirdPart) result += `-${thirdPart}`
 
   return result
 }
 
-/**
- * Проверка полного формата телефона.
- */
 function isValidPhone(phone: string): boolean {
   return PHONE_MASK.test(phone)
 }
 
-function BookingPopup() {
+function BookingModal() {
   const [isVisible, setIsVisible] = useState(false)
   const [isClosed, setIsClosed] = useState(false)
 
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [comment, setComment] = useState('')
-  const [isPersonalDataAccepted, setIsPersonalDataAccepted] =
-    useState(false)
+  const [isPersonalDataAccepted, setIsPersonalDataAccepted] = useState(false)
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState('')
 
-  /**
-   * Показываем форму через 3 секунды
-   * после загрузки страницы.
-   */
+  // Показываем форму через 3 секунды после загрузки
   useEffect(() => {
-    if (isClosed) {
-      return
-    }
+    if (isClosed) return
 
     const timer = window.setTimeout(() => {
       setIsVisible(true)
     }, 3000)
 
-    return () => {
-      window.clearTimeout(timer)
-    }
+    return () => window.clearTimeout(timer)
   }, [isClosed])
 
-  /**
-   * Закрытие формы.
-   */
   const handleClose = () => {
-    if (isSubmitting) {
-      return
-    }
-
+    if (isSubmitting) return
     setIsVisible(false)
     setIsClosed(true)
   }
 
-  /**
-   * Обработка имени.
-   */
-  const handleNameChange = (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
-    setName(event.target.value)
-
-    if (error) {
-      setError('')
-    }
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value)
+    if (error) setError('')
   }
 
-  /**
-   * Обработка телефона.
-   */
-  const handlePhoneChange = (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
-    const formattedPhone = formatPhone(
-      event.target.value,
-    )
-
-    setPhone(formattedPhone)
-
-    if (error) {
-      setError('')
-    }
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPhone(formatPhone(e.target.value))
+    if (error) setError('')
   }
 
-  /**
-   * Обработка комментария.
-   */
-  const handleCommentChange = (
-    event: ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    setComment(event.target.value)
-
-    if (error) {
-      setError('')
-    }
+  const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value)
+    if (error) setError('')
   }
 
-  /**
-   * Обработка согласия на обработку
-   * персональных данных.
-   */
-  const handleConsentChange = (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
-    setIsPersonalDataAccepted(event.target.checked)
-
-    if (error) {
-      setError('')
-    }
+  const handleConsentChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsPersonalDataAccepted(e.target.checked)
+    if (error) setError('')
   }
 
-  /**
-   * Отправка заявки.
-   */
-  const handleSubmit = async (
-    event: FormEvent<HTMLFormElement>,
-  ) => {
-    event.preventDefault()
-
-    if (isSubmitting) {
-      return
-    }
-
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (isSubmitting) return
     setError('')
 
     const trimmedName = name.trim()
     const trimmedPhone = phone.trim()
     const trimmedComment = comment.trim()
 
-    /**
-     * Имя обязательно.
-     */
-    if (!trimmedName) {
-      setError('Пожалуйста, укажите Ваше имя')
-      return
-    }
-
-    /**
-     * Телефон обязательно.
-     */
-    if (!trimmedPhone) {
-      setError('Пожалуйста, укажите номер телефона')
-      return
-    }
-
-    /**
-     * Проверяем полный формат телефона.
-     */
-    if (!isValidPhone(trimmedPhone)) {
-      setError(
-        'Введите телефон в формате +7-(999)-999-99-99',
-      )
-      return
-    }
-
-    /**
-     * Согласие на обработку персональных данных
-     * обязательно.
-     */
-    if (!isPersonalDataAccepted) {
-      setError(
-        'Необходимо согласиться на обработку персональных данных',
-      )
-      return
-    }
+    if (!trimmedName) return setError('Пожалуйста, укажите Ваше имя')
+    if (!trimmedPhone) return setError('Пожалуйста, укажите номер телефона')
+    if (!isValidPhone(trimmedPhone)) return setError('Введите телефон в формате +7-(999)-999-99-99')
+    if (!isPersonalDataAccepted) return setError('Необходимо согласиться на обработку персональных данных')
 
     try {
       setIsSubmitting(true)
 
       const response = await fetch('/api/booking', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: trimmedName,
           phone: trimmedPhone,
@@ -237,60 +118,38 @@ function BookingPopup() {
         }),
       })
 
-      let data: {
-        success?: boolean
-        message?: string
-      }
+      let data: { success?: boolean; message?: string }
 
       try {
         data = await response.json()
       } catch {
-        throw new Error(
-          'Сервер вернул некорректный ответ',
-        )
+        throw new Error('Сервер вернул некорректный ответ')
       }
 
       if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || 'Не удалось отправить заявку',
-        )
+        throw new Error(data.message || 'Не удалось отправить заявку')
       }
 
-      /**
-       * Заявка успешно отправлена.
-       */
       setIsSuccess(true)
       setName('')
       setPhone('')
       setComment('')
       setIsPersonalDataAccepted(false)
-    } catch (error) {
-      console.error('Booking error:', error)
-
-      setError(
-        error instanceof Error
-          ? error.message
-          : 'Не удалось отправить заявку',
-      )
+    } catch (err) {
+      console.error('Booking error:', err)
+      setError(err instanceof Error ? err.message : 'Не удалось отправить заявку')
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  if (!isVisible) {
-    return null
-  }
+  if (!isVisible) return null
 
   return (
     <div className='booking-popup'>
       <div className='booking-popup__header'>
         <div>
-          <h2>
-            {isSuccess
-              ? 'Заявка отправлена!'
-              : 'Нужна помощь?'}
-          </h2>
-
+          <h2>{isSuccess ? 'Заявка отправлена!' : 'Нужна помощь?'}</h2>
           <p>
             {isSuccess
               ? 'Мы свяжемся с Вами в ближайшее время.'
@@ -305,16 +164,12 @@ function BookingPopup() {
           disabled={isSubmitting}
           aria-label='Закрыть'
         >
-          ×
+          &times;
         </button>
       </div>
 
       {!isSuccess && (
-        <form
-          className='booking-popup__form'
-          onSubmit={handleSubmit}
-          noValidate
-        >
+        <form className='booking-popup__form' onSubmit={handleSubmit} noValidate>
           <input
             type='text'
             placeholder='Ваше имя *'
@@ -356,21 +211,14 @@ function BookingPopup() {
               required
               aria-required='true'
             />
-
-            <span
-              className='booking-popup__consent-checkbox'
-              aria-hidden='true'
-            />
-
+            <span className='booking-popup__consent-checkbox' aria-hidden='true' />
             <span className='booking-popup__consent-text'>
               Я согласен (-на) на обработку{' '}
               <a
                 href='/politics'
                 target='_blank'
                 rel='noopener noreferrer'
-                onClick={(event) =>
-                  event.stopPropagation()
-                }
+                onClick={(e) => e.stopPropagation()}
               >
                 персональных данных
               </a>
@@ -378,21 +226,13 @@ function BookingPopup() {
           </label>
 
           {error && (
-            <p
-              className='booking-popup__error'
-              role='alert'
-            >
+            <p className='booking-popup__error' role='alert'>
               {error}
             </p>
           )}
 
-          <button
-            type='submit'
-            disabled={isSubmitting}
-          >
-            {isSubmitting
-              ? 'Отправляем...'
-              : 'Заказать вызов'}
+          <button type='submit' disabled={isSubmitting}>
+            {isSubmitting ? 'Отправляем...' : 'Заказать вызов'}
           </button>
         </form>
       )}
@@ -400,4 +240,4 @@ function BookingPopup() {
   )
 }
 
-export default BookingPopup
+export default BookingModal

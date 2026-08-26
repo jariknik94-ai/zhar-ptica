@@ -1,10 +1,5 @@
 .reveal {
-  will-change:
-    transform,
-    opacity,
-    filter;
-
+  will-change: transform, opacity, filter;
   backface-visibility: hidden;
-
   transform-style: preserve-3d;
 }

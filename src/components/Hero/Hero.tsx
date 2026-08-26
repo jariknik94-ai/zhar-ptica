@@ -6,28 +6,28 @@ import './Hero.scss'
 function Hero() {
   const [offset, setOffset] = useState(0)
 
+  useEffect(() => {
+    let ticking = false
+    let latestValue = 0
 
-useEffect(() => {
-  let ticking = false
-  let latestValue = 0
+    const handleScroll = () => {
+      latestValue = window.scrollY * 0.3
 
-  const handleScroll = () => {
-    latestValue = window.scrollY * 0.3
+      if (!ticking) {
+        ticking = true
 
-    if (!ticking) {
-      ticking = true
-
-      window.requestAnimationFrame(() => {
-        setOffset(latestValue)
-        ticking = false
-      })
+        window.requestAnimationFrame(() => {
+          setOffset(latestValue)
+          ticking = false
+        })
+      }
     }
-  }
 
-  window.addEventListener('scroll', handleScroll, { passive: true })
+    // Добавлен флаг { passive: true } для оптимизации производительности скролла
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
-  return () => window.removeEventListener('scroll', handleScroll)
-}, [])
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <section className='hero'>

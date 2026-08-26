@@ -7,24 +7,24 @@ import Footer from "../../components/Footer/Footer";
 import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
 import Contacts from "../../components/Contacts/Contacts";
 import SEO from "../../components/SEO/SEO";
-import React from "react";
 
 // LAZY LOADED SECTIONS
 const Services = lazy(() => import("../../components/Services/Services"));
 const Advantages = lazy(() => import("../../components/Advantages/Advantages"));
-const Reviews = React.lazy(() => import('../../components/Reviews/Reviews'))
-const Process = React.lazy(() => import('../../components/Process/Process'))
-const BeforeAfter = React.lazy(() => import('../../components/BeforeAfter/BeforeAfter'))
+const Reviews = lazy(() => import('../../components/Reviews/Reviews'));
+const Process = lazy(() => import('../../components/Process/Process'));
+const BeforeAfter = lazy(() => import('../../components/BeforeAfter/BeforeAfter'));
 
 function Home() {
   return (
-    <>
-    <SEO
-    title="Ателье «Жар птица» — реставрация пуховых подушек, одеял и перин в Прокопьевске."
-    description="Ателье «Жар птица» с 2011 года выполняет реставрацию подушек, одеял и перин. Очистка пухо-перьевого наполнителя, замена наперников, пошив постельного белья."
-    canonical="/"
-    localBusiness
-    />
+    <div className="home-page">
+      <SEO
+        title="Ателье «Жар птица» — реставрация пуховых подушек, одеял и перин в Прокопьевске."
+        description="Ателье «Жар птица» с 2011 года выполняет реставрацию подушек, одеял и перин. Очистка пухо-перьевого наполнителя, замена наперников, пошив постельного белья."
+        canonical="/"
+        localBusiness
+      />
+      
       <Navbar />
 
       {/* HERO (LCP PRIORITY) */}
@@ -33,7 +33,6 @@ function Home() {
       </section>
 
       <Suspense fallback={null}>
-
         {/* SERVICES */}
         <section id="services">
           <Services />
@@ -58,10 +57,9 @@ function Home() {
         <section id="reviews">
           <Reviews />
         </section>
-
       </Suspense>
 
-      {/* CTA (оставляем сразу — важный конверсионный блок) */}
+      {/* CTA / PRICE */}
       <section id="price">
         <CTA />
       </section>
@@ -74,7 +72,7 @@ function Home() {
       <ScrollTopButton />
 
       <Footer />
-    </>
+    </div>
   );
 }
 

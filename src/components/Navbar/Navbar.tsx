@@ -15,7 +15,6 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
   // THEME
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem('theme')
-
     return savedTheme === 'light' ? 'light' : 'dark'
   })
 
@@ -32,29 +31,32 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
 
   // TOGGLE THEME
   const toggleTheme = () => {
-    setTheme((currentTheme) =>
-      currentTheme === 'dark' ? 'light' : 'dark'
-    )
-
+    setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))
     setMenuOpen(false)
   }
 
-  // LOCK SCROLL
+  // LOCK SCROLL & ESCAPE KEY HANDLER
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && menuOpen) {
+        setMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
     return () => {
       document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [menuOpen])
 
   // OUTSIDE CLICK
   useEffect(() => {
     const handleOutside = (e: MouseEvent) => {
-      if (
-        navRef.current &&
-        !navRef.current.contains(e.target as Node)
-      ) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setMenuOpen(false)
       }
     }
@@ -68,12 +70,16 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
     }
   }, [menuOpen])
 
-  // SCROLL FUNCTION
+  // SCROLL FUNCTION WITH HEADER OFFSET
   const scrollTo = (id: string) => {
     const el = document.getElementById(id)
-
     if (el) {
-      el.scrollIntoView({
+      const navHeight = 84 // Высота шапки для отступа
+      const elementPosition = el.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight
+
+      window.scrollTo({
+        top: offsetPosition,
         behavior: 'smooth',
       })
     }
@@ -89,7 +95,6 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
 
     if (location.pathname !== '/') {
       navigate('/')
-
       setTimeout(() => {
         scrollTo(id)
       }, 100)
@@ -98,11 +103,11 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
     }
   }
 
-  // ACTIVE SCROLL SPY
+  // ACTIVE SCROLL SPY (Optimized)
   useEffect(() => {
     if (isPrice || isPolitics) return
 
-    const sections = [
+    const sectionIds = [
       'home',
       'services',
       'advantages',
@@ -115,16 +120,12 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
     const handleScroll = () => {
       let current = 'home'
 
-      sections.forEach((id) => {
+      sectionIds.forEach((id) => {
         const el = document.getElementById(id)
-
         if (el) {
           const rect = el.getBoundingClientRect()
-
-          if (
-            rect.top <= 120 &&
-            rect.bottom >= 120
-          ) {
+          // Проверяем положение секции относительно верхней части экрана
+          if (rect.top <= 140 && rect.bottom >= 140) {
             current = id
           }
         }
@@ -133,7 +134,7 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
       setActive(current)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -148,122 +149,76 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
       />
 
       <header className="navbar">
-        <div
-          className="container navbar-content"
-          ref={navRef}
-        >
-
+        <div className="container navbar-content" ref={navRef}>
           {/* LOGO */}
           <div
             className="logo"
             onClick={goHome}
             style={{ cursor: 'pointer' }}
+            role="button"
+            tabIndex={0}
           >
             <img
               className="logo-avatar"
               src="/favicon.png"
               alt="Жар-птица"
             />
-
             Жар птица
           </div>
 
           {/* MAIN NAV */}
           {!isPrice && !isPolitics && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-
               <a
-                className={
-                  active === 'home'
-                    ? 'active-link'
-                    : ''
-                }
+                className={active === 'home' ? 'active-link' : ''}
                 onClick={() => goToSection('home')}
               >
                 Главная
               </a>
-
               <a
-                className={
-                  active === 'services'
-                    ? 'active-link'
-                    : ''
-                }
+                className={active === 'services' ? 'active-link' : ''}
                 onClick={() => goToSection('services')}
               >
                 Услуги
               </a>
-
               <a
-                className={
-                  active === 'advantages'
-                    ? 'active-link'
-                    : ''
-                }
+                className={active === 'advantages' ? 'active-link' : ''}
                 onClick={() => goToSection('advantages')}
               >
                 Преимущества
               </a>
-
               <a
-                className={
-                  active === 'process'
-                    ? 'active-link'
-                    : ''
-                }
+                className={active === 'process' ? 'active-link' : ''}
                 onClick={() => goToSection('process')}
               >
                 Процесс
               </a>
-
               <a
-                className={
-                  active === 'reviews'
-                    ? 'active-link'
-                    : ''
-                }
+                className={active === 'reviews' ? 'active-link' : ''}
                 onClick={() => goToSection('reviews')}
               >
                 Отзывы
               </a>
-
               <a
-                className={
-                  active === 'price'
-                    ? 'active-link'
-                    : ''
-                }
+                className={active === 'price' ? 'active-link' : ''}
                 onClick={() => navigate('/price')}
               >
                 Прайс
               </a>
-
               <a
-                className={
-                  active === 'contacts'
-                    ? 'active-link'
-                    : ''
-                }
+                className={active === 'contacts' ? 'active-link' : ''}
                 onClick={() => goToSection('contacts')}
               >
                 Контакты
               </a>
-
             </nav>
           )}
 
           {/* PRICE NAV */}
           {isPrice && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-
-              <a onClick={goHome}>
-                Главная
-              </a>
-
-              <a className="active-link">
-                Прайс
-              </a>
-
+              <a onClick={goHome}>Главная</a>
+              <a className="active-link">Прайс</a>
               <a
                 onClick={() => {
                   navigate('/')
@@ -274,33 +229,20 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
               >
                 Контакты
               </a>
-
             </nav>
           )}
 
           {/* POLITICS NAV */}
           {isPolitics && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-
-              <a onClick={goHome}>
-                Главная
-              </a>
-
+              <a onClick={goHome}>Главная</a>
               <a
-                className={
-                  active === 'price'
-                    ? 'active-link'
-                    : ''
-                }
+                className={active === 'price' ? 'active-link' : ''}
                 onClick={() => navigate('/price')}
               >
                 Прайс
               </a>
-
-              <a className="active-link">
-                Политика
-              </a>
-
+              <a className="active-link">Политика</a>
             </nav>
           )}
 
@@ -308,9 +250,7 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
           <button
             type="button"
             className={`theme-toggle ${
-              theme === 'light'
-                ? 'theme-toggle--light'
-                : 'theme-toggle--dark'
+              theme === 'light' ? 'theme-toggle--light' : 'theme-toggle--dark'
             }`}
             onClick={toggleTheme}
             aria-label={
@@ -329,21 +269,15 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
           {/* BURGER */}
           <button
             type="button"
-            className={`burger ${
-              menuOpen ? 'active' : ''
-            }`}
+            className={`burger ${menuOpen ? 'active' : ''}`}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={
-              menuOpen
-                ? 'Закрыть меню'
-                : 'Открыть меню'
-            }
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
           >
             <span />
             <span />
             <span />
           </button>
-
         </div>
       </header>
     </>

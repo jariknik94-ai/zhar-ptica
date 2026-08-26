@@ -1,4 +1,6 @@
-/* TT WELLINGTONS — LOCAL FONTS */
+/* ========================================================= */
+/* TT WELLINGTONS — LOCAL FONTS                              */
+/* ========================================================= */
 
 @font-face {
   font-family: 'TT Wellingtons';
@@ -73,7 +75,9 @@
 }
 
 
-/* DESIGN SYSTEM — DARK THEME */
+/* ========================================================= */
+/* DESIGN SYSTEM — DARK THEME                                */
+/* ========================================================= */
 
 :root {
   --bg: #07111f;
@@ -120,7 +124,9 @@
 }
 
 
-/* LIGHT THEME */
+/* ========================================================= */
+/* LIGHT THEME                                               */
+/* ========================================================= */
 
 [data-theme='light'] {
   --bg: #f7f9fc;
@@ -129,34 +135,28 @@
   --text: #171a1f;
   --muted: rgba(23, 26, 31, 0.82);
 
-  /* #f59e0b → #BFD9FC */
   --accent: #BFD9FC;
-
-  /* #f97316 → #A7C1FC */
   --accent-2: #A7C1FC;
 
-  /* Общая карточка для компонентов,
-    которым не нужен собственный glass-фон. */
   --card: rgba(255, 255, 255, 0.72);
-
   --stroke: rgba(32, 37, 45, 0.1);
 
   --button-text: #20252d;
 
-  /* Glass Navbar */
   --navbar-bg: rgba(247, 243, 237, 0.35);
   --navbar-border: rgba(32, 37, 45, 0.08);
 
   --shadow: rgba(31, 41, 55, 0.12);
   --shadow-accent: rgba(167, 193, 252, 0.35);
 
-  /* Светлые голубые пятна */
   --glow-primary: rgba(167, 193, 252, 0.4);
   --glow-secondary: rgba(191, 217, 252, 0.3);
 }
 
 
-/* GLOBAL */
+/* ========================================================= */
+/* GLOBAL RESETS                                             */
+/* ========================================================= */
 
 html {
   scroll-behavior: smooth;
@@ -176,22 +176,17 @@ body,
   box-sizing: border-box;
 }
 
-
-/* BODY */
-
 body {
   font-family: 'TT Wellingtons', sans-serif;
-
   background: var(--bg);
   color: var(--text);
-
-  transition:
-    background-color 0.35s ease,
-    color 0.35s ease;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 
-/* TYPOGRAPHY */
+/* ========================================================= */
+/* TYPOGRAPHY                                                */
+/* ========================================================= */
 
 h1,
 h2,
@@ -210,13 +205,7 @@ h2 {
   font-size: 52px;
   font-weight: 400;
   text-align: center;
-
-  background: linear-gradient(
-    90deg,
-    var(--text),
-    var(--accent)
-  );
-
+  background: linear-gradient(90deg, var(--text), var(--accent));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -230,12 +219,13 @@ p {
   font-size: 18px;
   line-height: 1.8;
   font-weight: 100;
-
   color: var(--muted);
 }
 
 
-/* CONTAINER */
+/* ========================================================= */
+/* CONTAINER & DECORATIVE GLOWS                              */
+/* ========================================================= */
 
 .container {
   width: 90%;
@@ -243,202 +233,130 @@ p {
   margin: 0 auto;
 }
 
-
-/* DECORATIVE LIGHT / GLOW */
-
 body::before {
   content: '';
-
   position: fixed;
-
   width: 700px;
   height: 700px;
-
   top: -250px;
   right: -250px;
-
-  background:
-    radial-gradient(
-      circle,
-      var(--glow-primary),
-      transparent 70%
-    );
-
+  background: radial-gradient(circle, var(--glow-primary), transparent 70%);
   z-index: -1;
   pointer-events: none;
-
-  transition:
-    background 0.35s ease;
+  transition: background 0.35s ease;
 }
 
 body::after {
   content: '';
-
   position: fixed;
   inset: 0;
-
   background:
-    radial-gradient(
-      circle at 20% 30%,
-      var(--glow-secondary),
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      var(--glow-primary),
-      transparent 45%
-    );
-
+    radial-gradient(circle at 20% 30%, var(--glow-secondary), transparent 40%),
+    radial-gradient(circle at 80% 70%, var(--glow-primary), transparent 45%);
   z-index: -1;
   pointer-events: none;
-
-  transition:
-    background 0.35s ease;
+  transition: background 0.35s ease;
 }
 
 
-/* BUTTONS */
+/* ========================================================= */
+/* BUTTONS                                                   */
+/* ========================================================= */
 
 button {
   border: none;
   cursor: pointer;
-
   position: relative;
   overflow: hidden;
-
   padding: 18px 38px;
-
   font-size: 17px;
   font-weight: 400;
-
   border-radius: 18px;
-
   transition:
     transform 0.4s ease,
     box-shadow 0.4s ease,
     background 0.35s ease,
     color 0.35s ease;
-}
 
-button::after {
-  content: '';
-
-  position: absolute;
-
-  top: 0;
-  left: -100%;
-
-  width: 100%;
-  height: 100%;
-
-  background:
-    linear-gradient(
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
       120deg,
       transparent,
       rgba(255, 255, 255, 0.25),
       transparent
     );
+    transition: left 0.6s ease;
+  }
 
-  transition:
-    left 0.6s ease;
+  &:hover::after {
+    left: 100%;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
-
-button:hover::after {
-  left: 100%;
-}
-
-
-/* HERO BUTTON */
 
 .hero button {
   margin-right: 25px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--accent),
-      var(--accent-2)
-    );
-
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: var(--button-text);
+  box-shadow: 0 10px 30px var(--shadow-accent);
 
-  box-shadow:
-    0 10px 30px var(--shadow-accent);
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 18px 45px var(--shadow-accent);
+  }
 }
 
-.hero button:hover {
-  transform:
-    translateY(-5px)
-    scale(1.02);
-
-  box-shadow:
-    0 18px 45px var(--shadow-accent);
-}
-
-
-/* PRIMARY BUTTON */
-
-.primary-btn:hover {
-  transform:
-    translateY(-5px)
-    scale(1.02);
-
-  box-shadow:
-    0 18px 45px var(--shadow-accent);
-}
-
-.primary-btn:active,
-button:active {
-  transform: scale(0.96);
+.primary-btn {
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 18px 45px var(--shadow-accent);
+  }
+  &:active {
+    transform: scale(0.96);
+  }
 }
 
 
-/* NAVBAR GLASS */
+/* ========================================================= */
+/* NAVBAR GLASS                                              */
+/* ========================================================= */
 
 .navbar {
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-
+  backdrop-filter: var(--navbar-backdrop-filter);
+  -webkit-backdrop-filter: var(--navbar-backdrop-filter);
   background: var(--navbar-bg);
-
-  border-bottom:
-    1px solid var(--navbar-border);
-
-  transition:
-    background 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+  border-bottom: 1px solid var(--navbar-border);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 
-/* LINKS */
+/* ========================================================= */
+/* LINKS & SELECTION                                         */
+/* ========================================================= */
 
 nav a {
   color: var(--text);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 
-  transition:
-    color 0.3s ease,
-    text-shadow 0.3s ease;
+  &:hover {
+    color: var(--accent);
+    text-shadow: 0 0 18px var(--glow-secondary);
+  }
 }
-
-nav a:hover {
-  color: var(--accent);
-
-  text-shadow:
-    0 0 18px var(--glow-secondary);
-}
-
-
-/* TEXT GLOW */
 
 h1:hover,
 h2:hover {
-  text-shadow:
-    0 0 25px var(--glow-secondary);
+  text-shadow: 0 0 25px var(--glow-secondary);
 }
-
-
-/* SELECTION */
 
 ::selection {
   background: var(--accent);
@@ -446,16 +364,12 @@ h2:hover {
 }
 
 
-/* LIGHT THEME — GLOBAL TEXT / UI */
+/* ========================================================= */
+/* LIGHT THEME — GLOBAL UI OVERRIDES                         */
+/* ========================================================= */
 
 [data-theme='light'] {
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     color: var(--text);
   }
 
@@ -467,128 +381,70 @@ h2:hover {
     color: var(--text);
   }
 
-
-  /* Navigation */
-
   nav a {
     color: var(--text);
-  }
 
-  nav a:hover {
-    color: var(--accent-2);
+    &:hover {
+      color: var(--accent-2);
+    }
   }
-
 
   .active-link {
     color: var(--text) !important;
+
+    &::after {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 12px var(--glow-secondary), 0 0 24px var(--glow-primary);
+    }
   }
-
-  .active-link::after {
-    background:
-      linear-gradient(
-        90deg,
-        var(--accent),
-        var(--accent-2)
-      );
-
-    box-shadow:
-      0 0 12px var(--glow-secondary),
-      0 0 24px var(--glow-primary);
-  }
-
-
-  /* Hero */
 
   .hero p {
     color: var(--muted);
   }
 
-
-  /* Secondary button */
-
   .secondary-btn {
-    background:
-      rgba(255, 255, 255, 0.55) !important;
-
-    border-color:
-      rgba(32, 37, 45, 0.12) !important;
-
-    color:
-      var(--text) !important;
+    background: rgba(255, 255, 255, 0.55) !important;
+    border-color: rgba(32, 37, 45, 0.12) !important;
+    color: var(--text) !important;
   }
 
-
-  /* Before / After */
-
   .ba-handle {
-    background:
-      linear-gradient(
-        135deg,
-        var(--accent),
-        var(--accent-2)
-      );
-
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     border-color: #ffffff;
-
-    box-shadow:
-      0 0 20px var(--glow-secondary),
-      0 10px 30px var(--shadow);
+    box-shadow: 0 0 20px var(--glow-secondary), 0 10px 30px var(--shadow);
   }
 
   .label {
-    background:
-      rgba(255, 255, 255, 0.72);
-
-    border-color:
-      rgba(32, 37, 45, 0.1);
-
+    background: rgba(255, 255, 255, 0.72);
+    border-color: rgba(32, 37, 45, 0.1);
     color: var(--text);
   }
 
-
-  /* Modal */
-
   .modal-overlay {
-    background:
-      rgba(20, 25, 35, 0.35);
+    background: rgba(20, 25, 35, 0.35);
   }
 
   .modal {
-    background:
-      rgba(255, 255, 255, 0.82);
-
-    border-color:
-      rgba(32, 37, 45, 0.1);
-
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(32, 37, 45, 0.1);
     color: var(--text);
-  }
 
-  .modal p {
-    color: var(--muted);
+    p {
+      color: var(--muted);
+    }
   }
 
   .modal-form input,
   .modal-form textarea {
-    background:
-      rgba(255, 255, 255, 0.8);
-
-    border-color:
-      rgba(32, 37, 45, 0.12);
-
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(32, 37, 45, 0.12);
     color: var(--text);
   }
 
-
-  /* Cookie */
-
   .cookie__card {
-    background:
-      rgba(255, 255, 255, 0.9);
-
+    background: rgba(255, 255, 255, 0.9);
     color: var(--text);
-
-    border-color:
-      rgba(32, 37, 45, 0.1);
+    border-color: rgba(32, 37, 45, 0.1);
   }
 
   .cookie__text {
@@ -600,131 +456,110 @@ h2:hover {
   }
 
   .cookie__btn--reject {
-    border-color:
-      rgba(32, 37, 45, 0.18);
-
+    border-color: rgba(32, 37, 45, 0.18);
     color: var(--text);
   }
-
-
-  /* Footer */
 
   .footer {
-    background:
-      linear-gradient(
-        to top,
-        rgba(237, 243, 250, 0.98),
-        rgba(247, 249, 252, 0.9)
-      );
-
+    background: linear-gradient(
+      to top,
+      rgba(237, 243, 250, 0.98),
+      rgba(247, 249, 252, 0.9)
+    );
     border-top-color: var(--stroke);
+
+    &__brand h3 {
+      color: var(--text);
+    }
+
+    &__desc {
+      color: var(--muted);
+    }
+
+    &__meta,
+    &__cookies {
+      color: rgba(32, 37, 45, 0.5);
+    }
+
+    a {
+      color: var(--accent-2);
+    }
   }
 
-  .footer__brand h3 {
-    color: var(--text);
+  .price-section {
+    h2, h3 {
+      color: var(--text);
+    }
+    h3 span {
+      color: var(--muted);
+    }
   }
 
-  .footer__desc {
-    color: var(--muted);
+  .price-table {
+    th {
+      color: var(--text);
+    }
+    td {
+      color: var(--muted);
+      border-top-color: var(--stroke);
+
+      &:last-child {
+        color: var(--accent-2);
+      }
+    }
   }
 
-  .footer__meta,
-  .footer__cookies {
-    color:
-      rgba(32, 37, 45, 0.5);
+  .politics {
+    &__card {
+      background: rgba(255, 255, 255, 0.88);
+      border-color: var(--stroke);
+    }
+
+    h1, h2, h3 {
+      color: var(--accent-2);
+    }
+
+    p, li {
+      color: var(--muted);
+    }
+
+    strong {
+      color: var(--text);
+    }
   }
-
-  .footer a {
-    color: var(--accent-2);
-  }
-
-
-  /* Price typography / table accents 
-     Сам glass-фон price-section теперь управляется
-     непосредственно Price.scss. */
-
-  .price-section h2,
-  .price-section h3 {
-    color: var(--text);
-  }
-
-  .price-section h3 span {
-    color: var(--muted);
-  }
-
-  .price-table th {
-    color: var(--text);
-  }
-
-  .price-table td {
-    color: var(--muted);
-
-    border-top-color: var(--stroke);
-  }
-
-  .price-table td:last-child {
-    color: var(--accent-2);
-  }
-
-
-  /* Politics */
-
-  .politics__card {
-    background:
-      rgba(255, 255, 255, 0.88);
-
-    border-color: var(--stroke);
-  }
-
-  .politics h1,
-  .politics h2,
-  .politics h3 {
-    color: var(--accent-2);
-  }
-
-  .politics p,
-  .politics li {
-    color: var(--muted);
-  }
-
-  .politics strong {
-    color: var(--text);
-  }
-
-
-  /* Floating CTA */
 
   .cta-btn {
-    box-shadow:
-      0 10px 30px var(--shadow);
+    box-shadow: 0 10px 30px var(--shadow);
   }
 
-
-  /* Overlay */
-
   .nav-overlay {
-    background:
-      rgba(20, 25, 35, 0.22);
+    background: rgba(20, 25, 35, 0.22);
   }
 }
 
 
-/* RESPONSIVE — DESKTOP */
+/* ========================================================= */
+/* RESPONSIVE MEDIA QUERIES                                  */
+/* ========================================================= */
 
 @media (min-width: 993px) {
-  .navbar .container {
-    width: 90%;
-    max-width: 1300px;
+  .navbar {
+    background: var(--navbar-bg) !important;
+    -webkit-backdrop-filter: var(--navbar-backdrop-filter) !important;
+    backdrop-filter: var(--navbar-backdrop-filter) !important;
+    border-bottom: 1px solid var(--navbar-border);
 
-    margin: 0 auto;
-
-    display: flex;
-    align-items: center;
+    .container {
+      width: 90%;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+    }
   }
 
   .navbar-content {
     width: 100%;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -732,56 +567,46 @@ h2:hover {
 
   .nav {
     margin-left: auto;
-
     display: flex;
     align-items: center;
-
     gap: 34px;
     flex-shrink: 0;
-
     background: transparent !important;
-
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-  }
 
-  .nav a {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-  }
+    a {
+      background: transparent !important;
+      background-color: transparent !important;
+      background-image: none !important;
 
-  .nav a:hover {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
+      &:hover {
+        background: transparent !important;
+        background-color: transparent !important;
+        background-image: none !important;
+      }
+    }
   }
 }
-
-
-/* RESPONSIVE — TABLET / MOBILE */
 
 @media (max-width: 768px) {
   .navbar-content {
     flex-direction: row;
-
     align-items: center;
     justify-content: space-between;
-
     gap: 20px;
   }
 
   .hero {
     padding-top: 150px;
     padding-bottom: 100px;
-  }
 
-  .hero h1 {
-    font-size: 42px;
-  }
-
-  .hero p {
-    font-size: 18px;
+    h1 {
+      font-size: 42px;
+    }
+    p {
+      font-size: 18px;
+    }
   }
 
   h2 {
@@ -789,20 +614,18 @@ h2:hover {
   }
 }
 
-
-/* SMALL MOBILE */
-
 @media (max-width: 480px) {
   .container {
     width: calc(100% - 32px);
   }
 
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  .hero p {
-    font-size: 16px;
+  .hero {
+    h1 {
+      font-size: 36px;
+    }
+    p {
+      font-size: 16px;
+    }
   }
 
   h2 {
@@ -812,20 +635,5 @@ h2:hover {
   button {
     font-size: 16px;
     padding: 16px 26px;
-  }
-}
-
-@media (min-width: 993px) {
-  .navbar {
-    background: var(--navbar-bg) !important;
-
-    -webkit-backdrop-filter:
-      var(--navbar-backdrop-filter) !important;
-
-    backdrop-filter:
-      var(--navbar-backdrop-filter) !important;
-
-    border-bottom:
-      1px solid var(--navbar-border);
   }
 }

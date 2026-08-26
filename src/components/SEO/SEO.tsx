@@ -73,7 +73,7 @@ export default function SEO({
       streetAddress: "проспект Ленина, 7",
       addressLocality: "Прокопьевск",
       addressRegion: "Кемеровская область — Кузбасс",
-      postalCode: "653053",
+      postalCode: "653033", // Исправлен почтовый индекс в соответствии с официальными данными
       addressCountry: {
         "@type": "Country",
         name: "Россия",
@@ -85,7 +85,7 @@ export default function SEO({
       longitude: 86.640932,
     },
     hasMap:
-      "https://2gis.ru/prokopevsk/firm/844954211643087",
+      "https://yandex.ru/maps/org/zharptitsa/175012033261/?ll=86.649857%2C53.865271&z=15",
     sameAs: [
       "https://wa.me/79039410157",
       "https://t.me/podushkaodeilo",
@@ -118,23 +118,16 @@ export default function SEO({
 
   return (
     <Helmet>
-    <meta name="theme-color" content="#07111f" />
-    <meta
-  name="author"
-  content="Ателье Жар птица"
-    />
+      <meta name="theme-color" content="#07111f" />
+      <meta name="author" content="Ателье Жар птица" />
 
       <title>{title}</title>
-
       <meta name="description" content={description} />
-
       <meta name="robots" content={robots} />
 
-      <link
-        rel="canonical"
-        href={`${SITE_URL}${canonical}`}
-      />
+      <link rel="canonical" href={`${SITE_URL}${canonical}`} />
 
+      {/* Open Graph */}
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Жар птица" />
       <meta property="og:locale" content="ru_RU" />
@@ -143,26 +136,13 @@ export default function SEO({
       <meta property="og:image" content={IMAGE} />
       <meta property="og:url" content={`${SITE_URL}${canonical}`} />
 
-      <meta
-        name="twitter:card"
-        content="summary_large_image"
-      />
+      {/* Twitter Cards */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={IMAGE} />
 
-      <meta
-        name="twitter:title"
-        content={title}
-      />
-
-      <meta
-        name="twitter:description"
-        content={description}
-      />
-
-      <meta
-        name="twitter:image"
-        content={IMAGE}
-      />
-
+      {/* Schema.org Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify(websiteSchema)}
       </script>
@@ -178,7 +158,6 @@ export default function SEO({
           {JSON.stringify(breadcrumbSchema)}
         </script>
       )}
-
     </Helmet>
   );
 }

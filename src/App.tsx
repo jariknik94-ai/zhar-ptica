@@ -7,7 +7,6 @@ import Politics from './pages/Politics/Politics'
 import CookiePopup from './components/CookiePopup/CookiePopup'
 import BookingModal from './components/BookingModal/BookingModal'
 
-
 function AppContent() {
   return (
     <>
@@ -20,7 +19,6 @@ function AppContent() {
       </Routes>
 
       <CookiePopup />
-
       <BookingModal />
     </>
   )
@@ -34,4 +32,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

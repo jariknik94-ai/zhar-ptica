@@ -7,7 +7,6 @@ function CookiePopup() {
 
   useEffect(() => {
     const accepted = localStorage.getItem('cookiesAccepted')
-
     if (!accepted) {
       setVisible(true)
     }
@@ -21,7 +20,11 @@ function CookiePopup() {
   if (!visible) return null
 
   return (
-    <div className="cookie">
+    <div 
+      className="cookie"
+      role="region" 
+      aria-label="Уведомление об использовании файлов cookie"
+    >
       <div className="cookie__card">
         <p className="cookie__text">
           ИП Никуличева Марина Викторовна использует файлы cookie и сервис веб-аналитики Яндекс Метрика для улучшения работы сайта. Вы можете запретить сохранение cookies в настройках своего браузера. Оставаясь на сайте, вы соглашаетесь с нашей{' '}
@@ -34,6 +37,7 @@ function CookiePopup() {
           <button
             className="cookie__btn cookie__btn--accept"
             onClick={acceptCookies}
+            aria-label="Принять использование файлов cookie"
           >
             OK
           </button>

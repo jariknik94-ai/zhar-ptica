@@ -9,7 +9,8 @@ function ScrollTopButton() {
       setVisible(window.scrollY > 400)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    // Добавлен флаг { passive: true } для оптимизации производительности
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -24,7 +25,7 @@ function ScrollTopButton() {
     <button
       onClick={scrollTop}
       className={`scroll-top-btn ${visible ? 'show' : ''}`}
-      aria-label="Наверх"
+      aria-label="Прокрутить страницу наверх"
     >
       ↑
     </button>

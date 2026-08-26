@@ -1,170 +1,91 @@
 .scroll-top-btn {
+  // Изолируем переменные темы внутри компонента
+  --scroll-border: rgba(255, 255, 255, 0.12);
+  --scroll-shadow: rgba(0, 0, 0, 0.35);
+  --scroll-hover-shadow: rgba(249, 115, 22, 0.25);
+  --scroll-hover-border: rgba(245, 158, 11, 0.4);
+
   position: fixed;
-
   right: 24px;
-  bottom: 90px;
-
+  bottom: 24px; // Опустили ниже, так как FloatingCTA больше не используется
   width: 58px;
   height: 58px;
-
   aspect-ratio: 1 / 1;
   box-sizing: border-box;
-
   border-radius: 50%;
-
-  border:
-    1px solid var(--scroll-border);
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--accent),
-      var(--accent-2)
-    );
-
+  border: 1px solid var(--scroll-border);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  
   backdrop-filter: blur(18px);
-
-  color:
-    var(--button-text);
-
+  -webkit-backdrop-filter: blur(18px); // Поддержка Safari
+  
+  color: var(--button-text);
   font-size: 22px;
   font-weight: 600;
-
   line-height: 1;
   text-align: center;
-
   display: grid;
   place-items: center;
-
   padding: 0;
-
   cursor: pointer;
-
   opacity: 0;
-
-  transform:
-    translateY(12px) scale(0.9);
-
-  transition:
-    0.35s ease;
-
-  box-shadow:
-    0 10px 30px var(--scroll-shadow);
-
+  transform: translateY(12px) scale(0.9);
+  transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  box-shadow: 0 10px 30px var(--scroll-shadow);
   z-index: 9999;
-}
 
+  /* SHOW */
+  &.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 
-/* SHOW */
+  /* HOVER */
+  &:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 18px 45px var(--scroll-hover-shadow);
+    border-color: var(--scroll-hover-border);
 
-.scroll-top-btn.show {
-  opacity: 1;
+    &::after {
+      left: 120%;
+    }
+  }
 
-  transform:
-    translateY(0) scale(1);
-}
-
-
-/* HOVER */
-
-.scroll-top-btn:hover {
-  transform:
-    translateY(-4px) scale(1.08);
-
-  box-shadow:
-    0 18px 45px var(--scroll-hover-shadow);
-
-  border-color:
-    var(--scroll-hover-border);
-}
-
-
-/* SHINE */
-
-.scroll-top-btn::after {
-  content: '';
-
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: 50%;
-
-  background:
-    linear-gradient(
+  /* SHINE EFFECT */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(
       120deg,
       transparent,
       rgba(255, 255, 255, 0.25),
       transparent
     );
+    left: -120%;
+    transition: 0.6s;
+  }
 
-  left: -120%;
+  /* ACTIVE */
+  &:active {
+    transform: scale(0.95);
+  }
 
-  transition: 0.6s;
-}
-
-
-.scroll-top-btn:hover::after {
-  left: 120%;
-}
-
-
-/* ACTIVE */
-
-.scroll-top-btn:active {
-  transform:
-    scale(0.95);
-}
-
-
-/* DARK THEME */
-
-:root {
-
-  --scroll-border:
-    rgba(255, 255, 255, 0.12);
-
-  --scroll-shadow:
-    rgba(0, 0, 0, 0.35);
-
-  --scroll-hover-shadow:
-    rgba(249, 115, 22, 0.25);
-
-  --scroll-hover-border:
-    rgba(245, 158, 11, 0.4);
-}
-
-
-/* LIGHT THEME */
-
-[data-theme='light'] {
-
-  --scroll-border:
-    rgba(31, 41, 55, 0.12);
-
-  --scroll-shadow:
-    rgba(65, 52, 35, 0.18);
-
-  --scroll-hover-shadow:
-    rgba(167, 193, 252, 0.4);
-
-  --scroll-hover-border:
-    rgba(167, 193, 252, 0.8);
-}
-
-
-/* RESPONSIVE */
-
-@media (max-width: 768px) {
-
-  .scroll-top-btn {
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
     right: 18px;
-
-    bottom: 82px;
-
+    bottom: 18px;
     width: 52px;
     height: 52px;
-
     font-size: 20px;
   }
+}
+
+/* LIGHT THEME OVERRIDES */
+[data-theme='light'] .scroll-top-btn {
+  --scroll-border: rgba(31, 41, 55, 0.12);
+  --scroll-shadow: rgba(65, 52, 35, 0.18);
+  --scroll-hover-shadow: rgba(167, 193, 252, 0.4);
+  --scroll-hover-border: rgba(167, 193, 252, 0.8);
 }

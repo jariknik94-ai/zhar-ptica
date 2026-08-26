@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom'
 import './Footer.scss'
 
 function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="footer">
       <div className="container footer__inner">
@@ -13,15 +16,15 @@ function Footer() {
         </div>
 
         <div className="footer__meta">
-          <span>© 2011–2026 Все права защищены</span>
+          <span>© 2011–{currentYear} Все права защищены</span>
         </div>
 
         <p className="footer__cookies">
           Продолжая использовать наш сайт, вы даете согласие на обработку файлов cookies и других
           пользовательских данных, <br />в соответствии с{' '}
-          <a href="/politics">
+          <Link to="/politics">
             политикой обработки персональных данных
-          </a>.
+          </Link>.
         </p>
 
       </div>

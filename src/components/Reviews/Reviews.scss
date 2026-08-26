@@ -1,189 +1,90 @@
 /* REVIEWS */
-
 .reviews {
   padding: 130px 0;
-}
 
+  // Изолируем переменные темы внутри компонента
+  --review-card-bg: rgba(255, 255, 255, 0.06);
+  --review-card-border: rgba(255, 255, 255, 0.08);
+  --review-card-hover-bg: rgba(255, 255, 255, 0.09);
+  --review-card-hover-border: rgba(249, 115, 22, 0.25);
+  --review-card-shadow: rgba(0, 0, 0, 0.45);
+  --review-text: rgba(255, 255, 255, 0.75);
+
+  @media (max-width: 768px) {
+    padding: 90px 0;
+  }
+}
 
 /* GRID */
-
 .reviews-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(300px, 1fr));
-
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
-
   margin-top: 60px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
 }
 
-
 /* REVIEW CARD — GLASS */
-
 .review-card {
+  margin: 0; // Сбрасываем стандартные отступы для <figure>
   padding: 35px;
-
   background: var(--review-card-bg);
-
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-
   border: 1px solid var(--review-card-border);
   border-radius: 28px;
-
   transition:
     transform 0.35s ease,
     background 0.35s ease,
     border-color 0.35s ease,
     box-shadow 0.35s ease;
-
   will-change: transform;
-}
 
-
-/* HOVER */
-
-.review-card:hover {
-  transform:
-    translateY(-10px)
-    scale(1.02);
-
-  background: var(--review-card-hover-bg);
-
-  border-color: var(--review-card-hover-border);
-
-  box-shadow:
-    0 30px 70px var(--review-card-shadow);
-}
-
-
-/* TEXT */
-
-.review-card p {
-  margin-bottom: 20px;
-
-  font-size: 18px;
-  line-height: 1.8;
-
-  color: var(--review-text);
-
-  transition:
-    color 0.35s ease;
-}
-
-
-/* AUTHOR */
-
-.review-card span {
-  color: var(--accent);
-
-  font-weight: 600;
-
-  transition:
-    color 0.35s ease;
-}
-
-
-/* DARK THEME */
-
-:root {
-  --review-card-bg:
-    rgba(255, 255, 255, 0.06);
-
-  --review-card-border:
-    rgba(255, 255, 255, 0.08);
-
-  --review-card-hover-bg:
-    rgba(255, 255, 255, 0.09);
-
-  --review-card-hover-border:
-    rgba(249, 115, 22, 0.25);
-
-  --review-card-shadow:
-    rgba(0, 0, 0, 0.45);
-
-  --review-text:
-    rgba(255, 255, 255, 0.75);
-}
-
-
-/* LIGHT THEME */
-
-[data-theme='light'] {
-  --review-card-bg:
-    rgba(255, 255, 255, 0.22);
-
-  --review-card-border:
-    rgba(31, 41, 55, 0.10);
-
-  --review-card-hover-bg:
-    rgba(255, 255, 255, 0.32);
-
-  --review-card-hover-border:
-    rgba(167, 193, 252, 0.7);
-
-  --review-card-shadow:
-    rgba(65, 52, 35, 0.14);
-
-  --review-text:
-    rgba(31, 41, 55, 0.88);
-}
-
-
-/* LIGHT THEME — REVIEW GLASS */
-
-[data-theme='light'] .review-card {
-  background:
-    rgba(255, 255, 255, 0.22) !important;
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  border-color:
-    var(--review-card-border);
-}
-
-
-/* RESPONSIVE — 992px */
-
-@media (max-width: 992px) {
-  .reviews-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-}
-
-
-/* RESPONSIVE — 768px */
-
-@media (max-width: 768px) {
-  .reviews {
-    padding: 90px 0;
-  }
-
-  .reviews-grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-
-  .review-card {
+  @media (max-width: 768px) {
     padding: 28px;
   }
-}
 
-
-/* RESPONSIVE — 480px */
-
-@media (max-width: 480px) {
-  .review-card {
+  @media (max-width: 480px) {
     padding: 22px;
     border-radius: 22px;
   }
 
-  .service-card h3,
-  .advantage-card h3,
-  .price-card h3 {
-    font-size: 22px;
+  &:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: var(--review-card-hover-bg);
+    border-color: var(--review-card-hover-border);
+    box-shadow: 0 30px 70px var(--review-card-shadow);
   }
+
+  p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--review-text);
+    transition: color 0.35s ease;
+  }
+
+  figcaption {
+    color: var(--accent);
+    font-weight: 600;
+    transition: color 0.35s ease;
+  }
+}
+
+/* LIGHT THEME OVERRIDES */
+[data-theme='light'] .reviews {
+  --review-card-bg: rgba(255, 255, 255, 0.22);
+  --review-card-border: rgba(31, 41, 55, 0.10);
+  --review-card-hover-bg: rgba(255, 255, 255, 0.32);
+  --review-card-hover-border: rgba(167, 193, 252, 0.7);
+  --review-card-shadow: rgba(65, 52, 35, 0.14);
+  --review-text: rgba(31, 41, 55, 0.88);
 }
