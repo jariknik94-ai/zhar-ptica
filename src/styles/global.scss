@@ -66,15 +66,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'TT Wellingtons';
-  src: url('/fonts/TT-Wellingtons-Black.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-
 /* ========================================================= */
 /* DESIGN SYSTEM — DARK THEME                                */
 /* ========================================================= */
@@ -636,4 +627,13 @@ h2:hover {
     font-size: 16px;
     padding: 16px 26px;
   }
+}
+/* ========================================================= */
+/* LIGHTHOUSE OPTIMIZATIONS                                  */
+/* ========================================================= */
+
+/* Отключаем тяжелый фильтр размытия для анимаций появления */
+.reveal {
+  filter: none !important;
+  will-change: opacity, transform;
 }

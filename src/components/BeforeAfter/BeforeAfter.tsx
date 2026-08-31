@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import After from "../../assets/BeforeAfter/After.avif"
-import Before from "../../assets/BeforeAfter/Before.avif"
+import After from "../../assets/BeforeAfter/After.png"
+import Before from "../../assets/BeforeAfter/Before.png"
 import Reveal from '../Reveal/Reveal'
 import './BeforeAfter.scss'
 
@@ -28,7 +28,9 @@ function BeforeAfter() {
               src={After}
               alt='Подушка после чистки и реставрации в ателье'
               className='ba-image'
-              loading="eager"
+              width="900"
+              height="500"
+              loading="lazy"
               decoding="async"
             />
 
@@ -43,6 +45,8 @@ function BeforeAfter() {
                 src={Before}
                 alt='Старая пуховая подушка до реставрации'
                 className='ba-image'
+                width="900"
+                height="500"
                 loading="lazy"
                 decoding="async"
               />

@@ -162,6 +162,8 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
               className="logo-avatar"
               src="/favicon.png"
               alt="Жар-птица"
+              width="60"
+              height="60"
             />
             Жар птица
           </div>

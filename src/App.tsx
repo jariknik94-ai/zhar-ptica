@@ -1,25 +1,29 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Home from './pages/Home/Home.tsx'
-import PricePage from './pages/PricePage/PricePage.tsx'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
-import Politics from './pages/Politics/Politics'
-import CookiePopup from './components/CookiePopup/CookiePopup'
-import BookingModal from './components/BookingModal/BookingModal'
+
+const PricePage = lazy(() => import('./pages/PricePage/PricePage.tsx'))
+const Politics = lazy(() => import('./pages/Politics/Politics'))
+const CookiePopup = lazy(() => import('./components/CookiePopup/CookiePopup'))
+const BookingModal = lazy(() => import('./components/BookingModal/BookingModal'))
 
 function AppContent() {
   return (
     <>
       <ScrollToTop />
 
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/price' element={<PricePage />} />
-        <Route path='/politics' element={<Politics />} />
-      </Routes>
+      <Suspense fallback={<div style={{ minHeight: '100svh' }} />}>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/price' element={<PricePage />} />
+          <Route path='/politics' element={<Politics />} />
+        </Routes>
 
-      <CookiePopup />
-      <BookingModal />
+        <CookiePopup />
+        <BookingModal />
+      </Suspense>
     </>
   )
 }
