@@ -22,8 +22,12 @@
   overflow: hidden;
   transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   
-  /* Добавлено: резервирование высоты для устранения сдвигов (CLS) на мобильных */
-  min-height: 400px;
+  /* Увеличено до 700px: резервирование высоты для устранения сдвигов (CLS) на мобильных */
+  min-height: 700px;
+
+  @media (min-width: 768px) {
+    min-height: auto; /* На десктопе убираем жесткую высоту */
+  }
 
   h2 {
     position: sticky;
