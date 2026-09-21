@@ -286,6 +286,7 @@ function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
       {isSuccess && (
         <button
+          className='booking-popup__success-button'
           type='button'
           onClick={handleClose}
         >

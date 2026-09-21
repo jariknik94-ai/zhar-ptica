@@ -197,6 +197,39 @@
     }
   }
 
+  /* SUCCESS CLOSE BUTTON */
+  &__success-button {
+    width: 100%;
+    min-height: 46px;
+    margin-top: 4px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+    color: var(--button-text);
+    font-family: 'TT Wellingtons', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 30px var(--shadow-accent);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      opacity 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px var(--shadow-accent);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
   /* CONSENT CHECKBOX */
   &__consent {
     display: flex;
@@ -302,6 +335,7 @@
     }
   }
 
+  /* FORM ERROR */
   &__error {
     margin: 0;
     font-size: 12px;

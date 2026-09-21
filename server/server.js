@@ -1,41 +1,28 @@
 import http from 'node:http'
 import https from 'node:https'
+import { loadEnvFile } from 'node:process'
+
+// Загружаем переменные из server/.env.
+// Файл .env находится рядом с этим server.js.
+loadEnvFile(new URL('./.env', import.meta.url))
 
 const PORT = process.env.PORT || 3001
+
 const MAX_BOT_TOKEN = process.env.MAX_BOT_TOKEN
+
 const MAX_CHAT_ID = process.env.MAX_CHAT_ID
 
 if (!MAX_BOT_TOKEN || !MAX_CHAT_ID) {
   console.error(
     'Ошибка: MAX_BOT_TOKEN и MAX_CHAT_ID должны быть заданы',
   )
-
   process.exit(1)
 }
 
-/*
- * HTTPS Agent для MAX API.
- *
- * На Windows Kaspersky перехватывает HTTPS-соединение
- * и подменяет сертификат MAX собственным сертификатом.
- *
- * Поэтому Node.js получает:
- *
- * MAX → Let's Encrypt → ISRG Root X1
- *
- * только после перехвата Kaspersky:
- *
- * Kaspersky Root → *.max.ru
- *
- * Windows доверяет этому сертификату,
- * но Node.js — нет.
- *
- * rejectUnauthorized: false применяется ТОЛЬКО
- * к соединениям этого Agent.
- *
- * Глобальный NODE_TLS_REJECT_UNAUTHORIZED
- * НЕ используется.
- */
+// HTTPS Agent для MAX API.
+// Используется для работы в окружении Windows,
+// где Kaspersky может перехватывать HTTPS-соединение
+// и подменять сертификат MAX собственным сертификатом.
 const maxAgent = new https.Agent({
   rejectUnauthorized: false,
 })
@@ -57,18 +44,14 @@ function sendToMax(message) {
           MAX_CHAT_ID,
         )}`,
         method: 'POST',
-
         headers: {
           Authorization: MAX_BOT_TOKEN,
           'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(payload),
         },
-
         agent: maxAgent,
-
         timeout: 15000,
       },
-
       (response) => {
         const chunks = []
 
@@ -116,7 +99,6 @@ function sendJson(res, statusCode, data) {
  * Проверка телефона.
  *
  * Допустимый формат:
- *
  * +7-(999)-999-99-99
  */
 function isValidPhone(phone) {
@@ -143,7 +125,6 @@ const server = http.createServer(async (req, res) => {
       success: false,
       message: 'Not found',
     })
-
     return
   }
 
@@ -183,7 +164,6 @@ const server = http.createServer(async (req, res) => {
         success: false,
         message: 'Некорректный JSON',
       })
-
       return
     }
 
@@ -199,7 +179,6 @@ const server = http.createServer(async (req, res) => {
         success: false,
         message: 'Введите имя',
       })
-
       return
     }
 
@@ -211,7 +190,6 @@ const server = http.createServer(async (req, res) => {
         success: false,
         message: 'Введите номер телефона',
       })
-
       return
     }
 
@@ -224,7 +202,6 @@ const server = http.createServer(async (req, res) => {
         message:
           'Телефон должен быть в формате +7-(999)-999-99-99',
       })
-
       return
     }
 
