@@ -1,10 +1,16 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Reveal from '../Reveal/Reveal'
 import './Hero.scss'
 
-function Hero() {
+interface HeroProps {
+  onBookingClick: () => void
+}
+
+function Hero({ onBookingClick }: HeroProps) {
   const [offset, setOffset] = useState(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
     let ticking = false
@@ -23,16 +29,19 @@ function Hero() {
       }
     }
 
-    // Добавлен флаг { passive: true } для оптимизации производительности скролла
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll, {
+      passive: true
+    })
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   return (
     <section className='hero'>
 
-      {/* Parallax background (GPU-friendly) */}
+      {/* Параллакс фонового свечения */}
       <div
         className='hero-light'
         style={{
@@ -43,27 +52,73 @@ function Hero() {
 
       <div className='container hero-content'>
 
-        {/* TITLE */}
+        {/* Заголовок */}
         <Reveal direction='up'>
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: 'easeOut' }}
+            transition={{
+              duration: 0.9,
+              ease: 'easeOut'
+            }}
           >
             Премиальная реставрация
             пухоперьевых изделий
           </motion.h1>
         </Reveal>
 
-        {/* TEXT */}
+        {/* Описание */}
         <Reveal direction='up' delay={0.2}>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.2
+            }}
           >
-            Ателье «Жар птица» — возвращаем комфорт, мягкость и свежесть вашим изделиям с 2011 года
+            Возвращаем мягкость, чистоту и комфорт вашим
+            подушкам, одеялам и перинам. Работаем с 2011 года.
           </motion.p>
+        </Reveal>
+
+        {/* Основные действия */}
+        <Reveal direction='up' delay={0.35}>
+          <motion.div
+            className='hero-actions'
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.7,
+              delay: 0.35
+            }}
+          >
+            {/* Обратный звонок */}
+            <div className='hero-action'>
+              <button
+                className='cta-price-btn cta-primary'
+                type='button'
+                onClick={onBookingClick}
+              >
+                Заказать обратный звонок
+              </button>
+            </div>
+
+            {/* Прайс-лист */}
+            <div className='hero-action hero-price-action'>
+              <button
+                className='cta-price-btn cta-secondary'
+                type='button'
+                onClick={() => navigate('/price')}
+              >
+                Посмотреть цены
+              </button>
+
+              <span className='hero-note'>
+                Подушки · Одеяла · Перины
+              </span>
+            </div>
+          </motion.div>
         </Reveal>
 
       </div>

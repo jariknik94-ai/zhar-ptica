@@ -8,24 +8,37 @@ function CTA() {
   return (
     <section className='cta'>
       <div className='container'>
-        <Reveal direction="up">
+
+        <Reveal direction='up'>
           <h2>Верните комфорт любимым изделиям</h2>
-          {/* Добавлен абзац, стили для которого уже были в вашем SCSS */}
+
           <p>
-            Узнайте стоимость наших услуг и подарите своим подушкам, одеялам и перинам вторую жизнь.
+            Узнайте стоимость наших услуг и подарите своим подушкам,
+            одеялам и перинам вторую жизнь.
           </p>
         </Reveal>
 
-        <Reveal direction="up" delay={0.2}>
+        <Reveal direction='up' delay={0.2}>
           <div className='cta-buttons'>
-            <button
-              className='cta-price-btn'
-              onClick={() => navigate('/price')}
-            >
-              Прайс
-            </button>
+
+            {/* Кнопка прайс-листа и подпись к ней */}
+            <div className='cta-price-action'>
+              <button
+                className='cta-price-btn'
+                type='button'
+                onClick={() => navigate('/price')}
+              >
+                Посмотреть цены
+              </button>
+
+              <span className='cta-note'>
+                Подушки · Одеяла · Перины
+              </span>
+            </div>
+
           </div>
         </Reveal>
+
       </div>
     </section>
   )

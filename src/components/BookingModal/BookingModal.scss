@@ -21,20 +21,26 @@
   width: min(420px, calc(100vw - 32px));
   box-sizing: border-box;
   padding: 28px;
-  
   background: var(--modal-bg);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   backdrop-filter: blur(20px) saturate(140%);
-  
   border: 1px solid var(--modal-border);
   border-radius: 24px;
   color: var(--modal-text);
-  box-shadow: 0 25px 70px var(--modal-shadow), inset 0 1px 0 var(--modal-highlight);
-  
+  box-shadow:
+    0 25px 70px var(--modal-shadow),
+    inset 0 1px 0 var(--modal-highlight);
+
   // Изоляция слоя для корректного рендера стекла в preview/production
   isolation: isolate;
+
   animation: bookingPopupIn 0.4s ease forwards;
-  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
 
   @media (max-width: 768px) {
     right: 16px;
@@ -46,14 +52,12 @@
 
   /* HEADER */
   &__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
+    position: relative;
     margin-bottom: 20px;
+    text-align: center;
 
     h2 {
-      margin: 0 0 10px;
+      margin: 0 40px 10px;
       font-size: 28px;
       line-height: 1.2;
       color: var(--modal-title);
@@ -75,10 +79,12 @@
 
   /* CLOSE BUTTON */
   &__close {
+    position: absolute;
+    top: -4px;
+    right: -4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
     width: 32px;
     height: 32px;
     padding: 0;
@@ -90,7 +96,10 @@
     line-height: 1;
     cursor: pointer;
     opacity: 0.7;
-    transition: opacity 0.3s ease, transform 0.3s ease, color 0.35s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      color 0.35s ease;
 
     &:hover {
       opacity: 1;
@@ -123,7 +132,11 @@
       outline: none;
       font-family: 'TT Wellingtons', sans-serif;
       font-size: 14px;
-      transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.3s ease;
+      transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        color 0.35s ease,
+        box-shadow 0.3s ease;
 
       @media (max-width: 768px) {
         font-size: 16px;
@@ -150,14 +163,21 @@
       margin-top: 4px;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      background: linear-gradient(
+        135deg,
+        var(--accent),
+        var(--accent-2)
+      );
       color: var(--button-text);
       font-family: 'TT Wellingtons', sans-serif;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       box-shadow: 0 10px 30px var(--shadow-accent);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        opacity 0.3s ease;
 
       &:hover {
         transform: translateY(-3px);
@@ -199,6 +219,7 @@
 
       &:checked + .booking-popup__consent-checkbox {
         border-color: var(--accent);
+
         &::after {
           transform: translate(-50%, -50%) scale(1);
         }
@@ -219,7 +240,11 @@
       border: 1.5px solid var(--modal-input-border);
       border-radius: 50%;
       background: var(--modal-input-bg);
-      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 
       &::after {
         content: '';
@@ -246,7 +271,9 @@
         position: relative;
         color: var(--accent);
         text-decoration: none;
-        transition: color 0.3s ease, opacity 0.3s ease;
+        transition:
+          color 0.3s ease,
+          opacity 0.3s ease;
 
         &::after {
           content: '';
@@ -257,7 +284,9 @@
           height: 1px;
           background: var(--accent);
           opacity: 0.4;
-          transition: background 0.3s ease, opacity 0.3s ease;
+          transition:
+            background 0.3s ease,
+            opacity 0.3s ease;
         }
 
         &:hover {
@@ -278,6 +307,7 @@
     font-size: 12px;
     line-height: 1.4;
     color: #ef4444;
+    text-align: center;
   }
 }
 
@@ -298,12 +328,18 @@
   --modal-close: #1f2937;
 }
 
+/* Ошибки формы остаются красными в светлой теме */
+[data-theme='light'] .booking-popup__error {
+  color: #ef4444;
+}
+
 // Сброс transform в none в конце анимации возвращает backdrop-filter в продакшне
 @keyframes bookingPopupIn {
   from {
     opacity: 0;
     transform: translateX(40px) translateY(40px) scale(0.96);
   }
+
   to {
     opacity: 1;
     transform: none;

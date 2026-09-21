@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+
 import type { ChangeEvent, FormEvent } from 'react'
+
 import './BookingModal.scss'
 
 const PHONE_MASK = /^\+7-\(\d{3}\)-\d{3}-\d{2}-\d{2}$/
@@ -41,76 +43,88 @@ function isValidPhone(phone: string): boolean {
   return PHONE_MASK.test(phone)
 }
 
-function BookingModal() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isClosed, setIsClosed] = useState(false)
+interface BookingModalProps {
+  isOpen: boolean
+  onClose: () => void
+}
 
+function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [comment, setComment] = useState('')
   const [isPersonalDataAccepted, setIsPersonalDataAccepted] = useState(false)
-
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState('')
 
-  // Показываем форму через 3 секунды после загрузки
-  useEffect(() => {
-    if (isClosed) return
-
-    const timer = window.setTimeout(() => {
-      setIsVisible(true)
-    }, 3000)
-
-    return () => window.clearTimeout(timer)
-  }, [isClosed])
-
   const handleClose = () => {
     if (isSubmitting) return
-    setIsVisible(false)
-    setIsClosed(true)
+    onClose()
   }
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
+
     if (error) setError('')
   }
 
   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPhone(formatPhone(e.target.value))
+
     if (error) setError('')
   }
 
   const handleCommentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value)
+
     if (error) setError('')
   }
 
   const handleConsentChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsPersonalDataAccepted(e.target.checked)
+
     if (error) setError('')
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     if (isSubmitting) return
+
     setError('')
 
     const trimmedName = name.trim()
     const trimmedPhone = phone.trim()
     const trimmedComment = comment.trim()
 
-    if (!trimmedName) return setError('Пожалуйста, укажите Ваше имя')
-    if (!trimmedPhone) return setError('Пожалуйста, укажите номер телефона')
-    if (!isValidPhone(trimmedPhone)) return setError('Введите телефон в формате +7-(999)-999-99-99')
-    if (!isPersonalDataAccepted) return setError('Необходимо согласиться на обработку персональных данных')
+    if (!trimmedName) {
+      return setError('Пожалуйста, укажите Ваше имя')
+    }
+
+    if (!trimmedPhone) {
+      return setError('Пожалуйста, укажите номер телефона')
+    }
+
+    if (!isValidPhone(trimmedPhone)) {
+      return setError(
+        'Введите телефон в формате +7-(999)-999-99-99'
+      )
+    }
+
+    if (!isPersonalDataAccepted) {
+      return setError(
+        'Необходимо согласиться на обработку персональных данных'
+      )
+    }
 
     try {
       setIsSubmitting(true)
 
       const response = await fetch('/api/booking', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           name: trimmedName,
           phone: trimmedPhone,
@@ -118,7 +132,10 @@ function BookingModal() {
         }),
       })
 
-      let data: { success?: boolean; message?: string }
+      let data: {
+        success?: boolean
+        message?: string
+      }
 
       try {
         data = await response.json()
@@ -127,29 +144,42 @@ function BookingModal() {
       }
 
       if (!response.ok || !data.success) {
-        throw new Error(data.message || 'Не удалось отправить заявку')
+        throw new Error(
+          data.message || 'Не удалось отправить заявку'
+        )
       }
 
       setIsSuccess(true)
+
       setName('')
       setPhone('')
       setComment('')
       setIsPersonalDataAccepted(false)
     } catch (err) {
       console.error('Booking error:', err)
-      setError(err instanceof Error ? err.message : 'Не удалось отправить заявку')
+
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Не удалось отправить заявку'
+      )
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  if (!isVisible) return null
+  if (!isOpen) return null
 
   return (
     <div className='booking-popup'>
       <div className='booking-popup__header'>
         <div>
-          <h2>{isSuccess ? 'Заявка отправлена!' : 'Нужна помощь?'}</h2>
+          <h2>
+            {isSuccess
+              ? 'Заявка отправлена!'
+              : 'Нужна помощь?'}
+          </h2>
+
           <p>
             {isSuccess
               ? 'Мы свяжемся с Вами в ближайшее время.'
@@ -169,7 +199,11 @@ function BookingModal() {
       </div>
 
       {!isSuccess && (
-        <form className='booking-popup__form' onSubmit={handleSubmit} noValidate>
+        <form
+          className='booking-popup__form'
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <input
             type='text'
             placeholder='Ваше имя *'
@@ -211,7 +245,12 @@ function BookingModal() {
               required
               aria-required='true'
             />
-            <span className='booking-popup__consent-checkbox' aria-hidden='true' />
+
+            <span
+              className='booking-popup__consent-checkbox'
+              aria-hidden='true'
+            />
+
             <span className='booking-popup__consent-text'>
               Я согласен (-на) на обработку{' '}
               <a
@@ -226,15 +265,32 @@ function BookingModal() {
           </label>
 
           {error && (
-            <p className='booking-popup__error' role='alert'>
+            <p
+              className='booking-popup__error'
+              role='alert'
+            >
               {error}
             </p>
           )}
 
-          <button type='submit' disabled={isSubmitting}>
-            {isSubmitting ? 'Отправляем...' : 'Заказать вызов'}
+          <button
+            type='submit'
+            disabled={isSubmitting}
+          >
+            {isSubmitting
+              ? 'Отправляем...'
+              : 'Заказать вызов'}
           </button>
         </form>
+      )}
+
+      {isSuccess && (
+        <button
+          type='button'
+          onClick={handleClose}
+        >
+          Закрыть
+        </button>
       )}
     </div>
   )

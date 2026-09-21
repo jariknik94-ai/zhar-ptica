@@ -7,7 +7,6 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 const PricePage = lazy(() => import('./pages/PricePage/PricePage.tsx'))
 const Politics = lazy(() => import('./pages/Politics/Politics'))
 const CookiePopup = lazy(() => import('./components/CookiePopup/CookiePopup'))
-const BookingModal = lazy(() => import('./components/BookingModal/BookingModal'))
 
 function AppContent() {
   return (
@@ -22,7 +21,6 @@ function AppContent() {
         </Routes>
 
         <CookiePopup />
-        <BookingModal />
       </Suspense>
     </>
   )
@@ -36,4 +34,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
