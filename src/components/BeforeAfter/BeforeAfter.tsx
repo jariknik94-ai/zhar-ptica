@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import After from "../../assets/BeforeAfter/After.png"
-import Before from "../../assets/BeforeAfter/Before.png"
+import After from '../../assets/BeforeAfter/After1.png'
+import Before from '../../assets/BeforeAfter/Before1.png'
 import Reveal from '../Reveal/Reveal'
 import './BeforeAfter.scss'
 
@@ -11,48 +11,49 @@ function BeforeAfter() {
     <section className='before-after'>
       <div className='container'>
 
-        <Reveal direction="up">
+        <Reveal direction='up'>
           <header>
             <h2>До / После реставрации</h2>
+
             <p className='subtitle'>
               Реальный результат восстановления пухоперьевых изделий
             </p>
           </header>
         </Reveal>
 
-        <Reveal direction="up" delay={0.2}>
+        <Reveal direction='up' delay={0.2}>
           <div className='ba-wrapper'>
 
-            {/* AFTER IMAGE (Background) */}
+            {/* AFTER IMAGE — фоновое изображение */}
             <img
               src={After}
               alt='Подушка после чистки и реставрации в ателье'
-              className='ba-image'
-              width="900"
-              height="500"
-              loading="lazy"
-              decoding="async"
+              className='ba-image ba-image--after'
+              width='900'
+              height='1200'
+              loading='lazy'
+              decoding='async'
             />
 
-            {/* BEFORE IMAGE (Foreground, clipped) */}
+            {/* BEFORE IMAGE — изображение до реставрации */}
             <div
               className='ba-overlay'
               style={{
-                clipPath: `inset(0 ${100 - position}% 0 0)`
+                clipPath: `inset(0 ${100 - position}% 0 0)`,
               }}
             >
               <img
                 src={Before}
                 alt='Старая пуховая подушка до реставрации'
-                className='ba-image'
-                width="900"
-                height="500"
-                loading="lazy"
-                decoding="async"
+                className='ba-image ba-image--before'
+                width='900'
+                height='1200'
+                loading='lazy'
+                decoding='async'
               />
             </div>
 
-            {/* DIVIDER */}
+            {/* Разделитель */}
             <div
               className='ba-divider'
               style={{ left: `${position}%` }}
@@ -60,7 +61,7 @@ function BeforeAfter() {
               <div className='ba-handle' />
             </div>
 
-            {/* SLIDER */}
+            {/* Ползунок */}
             <input
               type='range'
               min='0'
@@ -71,7 +72,7 @@ function BeforeAfter() {
               aria-label='Ползунок сравнения фотографий до и после реставрации'
             />
 
-            {/* LABELS */}
+            {/* Подписи */}
             <span className='label before'>До</span>
             <span className='label after'>После</span>
 

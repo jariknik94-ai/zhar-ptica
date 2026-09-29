@@ -61,20 +61,41 @@
     width: 100%;
     height: 500px;
     object-fit: cover;
+    object-position: center;
     display: block;
     user-select: none;
     pointer-events: none;
+    transform-origin: center center;
 
-    @media (max-width: 992px) { height: 420px; }
-    @media (max-width: 768px) { height: 340px; }
-    @media (max-width: 480px) { height: 260px; }
+    // BEFORE — НЕ ТРОГАЕМ
+    &--before {
+      transform: scale(1.064);
+    }
+
+    // AFTER — подгоняем под размер BEFORE
+    &--after {
+      transform: scale(1.050);
+    }
+
+    @media (max-width: 992px) {
+      height: 420px;
+    }
+
+    @media (max-width: 768px) {
+      height: 340px;
+    }
+
+    @media (max-width: 480px) {
+      height: 260px;
+    }
   }
 
   .ba-overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
-    // Убрали transition: clip-path для мгновенного отклика за ползунком
+
+    // Без transition для мгновенного отклика за ползунком
   }
 
   .ba-divider {
@@ -85,8 +106,14 @@
     background: var(--ba-divider);
     transform: translateX(-50%);
     z-index: 5;
-    box-shadow: 0 0 20px var(--ba-divider-glow), 0 0 40px var(--ba-accent-glow);
-    transition: background 0.35s ease, box-shadow 0.35s ease;
+
+    box-shadow:
+      0 0 20px var(--ba-divider-glow),
+      0 0 40px var(--ba-accent-glow);
+
+    transition:
+      background 0.35s ease,
+      box-shadow 0.35s ease;
   }
 
   .ba-handle {
@@ -97,15 +124,29 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+
+    background: linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
     border: 3px solid var(--ba-handle-border);
-    box-shadow: 0 0 20px var(--ba-handle-glow), 0 10px 30px var(--ba-handle-shadow);
-    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+
+    box-shadow:
+      0 0 20px var(--ba-handle-glow),
+      0 10px 30px var(--ba-handle-shadow);
+
+    transition:
+      background 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
 
     @media (max-width: 768px) {
       width: 34px;
       height: 34px;
     }
+
     @media (max-width: 480px) {
       width: 30px;
       height: 30px;
@@ -133,7 +174,11 @@
     border-radius: 10px;
     z-index: 6;
     backdrop-filter: blur(8px);
-    transition: color 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+
+    transition:
+      color 0.35s ease,
+      background 0.35s ease,
+      border-color 0.35s ease;
 
     @media (max-width: 768px) {
       font-size: 12px;
@@ -142,12 +187,18 @@
 
     &.before {
       left: 20px;
-      @media (max-width: 480px) { left: 12px; }
+
+      @media (max-width: 480px) {
+        left: 12px;
+      }
     }
 
     &.after {
       right: 20px;
-      @media (max-width: 480px) { right: 12px; }
+
+      @media (max-width: 480px) {
+        right: 12px;
+      }
     }
   }
 }
