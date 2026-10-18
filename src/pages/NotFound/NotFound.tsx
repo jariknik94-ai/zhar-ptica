@@ -16,7 +16,7 @@ function NotFound() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
       >
         <span className="not-found__eyebrow">
-          ЖАР ПТИЦА · АТЕЛЬЕ РЕСТАВРАЦИИ
+          АТЕЛЬЕ ЖАР ПТИЦА · РЕСТАВРАЦИЯ ПУХОПЕРЬЕВЫХ ИЗДЕЛИЙ
         </span>
 
         <div className="not-found__number" aria-label="Ошибка 404">
