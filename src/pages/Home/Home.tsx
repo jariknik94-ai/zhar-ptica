@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 
 import Navbar from '../../components/Navbar/Navbar';
 import Hero from '../../components/Hero/Hero';
@@ -17,26 +17,28 @@ const Process = lazy(() => import('../../components/Process/Process'));
 const BeforeAfter = lazy(() => import('../../components/BeforeAfter/BeforeAfter'));
 
 function Home() {
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [bookingMode, setBookingMode] = useState<'popup' | 'modal' | null>(null);
+  const bookingTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     // Автоматически показываем форму через 3 секунды после открытия страницы
-    const timer = window.setTimeout(() => {
-      setIsBookingOpen(true);
+    bookingTimer.current = window.setTimeout(() => {
+      setBookingMode('popup');
     }, 3000);
 
     // Очищаем таймер при размонтировании страницы
-    return () => window.clearTimeout(timer);
+    return () => window.clearTimeout(bookingTimer.current);
   }, []);
 
   // Открытие формы из Hero и других элементов страницы
   const handleBookingOpen = () => {
-    setIsBookingOpen(true);
+    window.clearTimeout(bookingTimer.current);
+    setBookingMode('modal');
   };
 
   // Закрытие формы
   const handleBookingClose = () => {
-    setIsBookingOpen(false);
+    setBookingMode(null);
   };
 
   return (
@@ -97,7 +99,8 @@ function Home() {
 
       {/* Форма обратного звонка */}
       <BookingModal
-        isOpen={isBookingOpen}
+        isOpen={bookingMode !== null}
+        mode={bookingMode ?? 'popup'}
         onClose={handleBookingClose}
       />
     </div>

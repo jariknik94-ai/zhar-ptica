@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import type { ChangeEvent, FormEvent } from 'react'
 
@@ -45,10 +46,11 @@ function isValidPhone(phone: string): boolean {
 
 interface BookingModalProps {
   isOpen: boolean
+  mode?: 'popup' | 'modal'
   onClose: () => void
 }
 
-function BookingModal({ isOpen, onClose }: BookingModalProps) {
+function BookingModal({ isOpen, mode = 'popup', onClose }: BookingModalProps) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [comment, setComment] = useState('')
@@ -56,6 +58,24 @@ function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState('')
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
+  useEffect(() => {
+    if (!isOpen || mode !== 'modal') return
+
+    const dialog = dialogRef.current
+    const previouslyFocused = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    dialog?.showModal()
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      dialog?.close()
+      document.body.style.overflow = previousOverflow
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus()
+    }
+  }, [isOpen, mode])
+
 
   const handleClose = () => {
     if (isSubmitting) return
@@ -170,17 +190,17 @@ function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
   if (!isOpen) return null
 
-  return (
+  const content = (
     <div className='booking-popup'>
       <div className='booking-popup__header'>
         <div>
-          <h2>
+          <h2 id='booking-title'>
             {isSuccess
               ? 'Заявка отправлена!'
               : 'Нужна помощь?'}
           </h2>
 
-          <p>
+          <p id='booking-description'>
             {isSuccess
               ? 'Мы свяжемся с Вами в ближайшее время.'
               : 'Закажите обратный звонок и мы обязательно с Вами свяжемся'}
@@ -206,6 +226,7 @@ function BookingModal({ isOpen, onClose }: BookingModalProps) {
         >
           <input
             type='text'
+            aria-label='Ваше имя'
             placeholder='Ваше имя *'
             value={name}
             onChange={handleNameChange}
@@ -217,6 +238,7 @@ function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
           <input
             type='tel'
+            aria-label='Номер телефона'
             placeholder='+7-(___)-___-__-__ *'
             value={phone}
             onChange={handlePhoneChange}
@@ -229,6 +251,7 @@ function BookingModal({ isOpen, onClose }: BookingModalProps) {
           />
 
           <textarea
+            aria-label='Комментарий'
             placeholder='Комментарий (необязательно)'
             value={comment}
             onChange={handleCommentChange}
@@ -294,6 +317,27 @@ function BookingModal({ isOpen, onClose }: BookingModalProps) {
         </button>
       )}
     </div>
+  )
+
+  if (mode === 'popup') return content
+
+  return createPortal(
+    <dialog
+      ref={dialogRef}
+      className='booking-dialog'
+      aria-labelledby='booking-title'
+      aria-describedby='booking-description'
+      onCancel={(event) => {
+        event.preventDefault()
+        handleClose()
+      }}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) handleClose()
+      }}
+    >
+      {content}
+    </dialog>,
+    document.body,
   )
 }
 
