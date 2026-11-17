@@ -79,6 +79,7 @@ function BookingModal({ isOpen, mode = 'popup', onClose }: BookingModalProps) {
 
   const handleClose = () => {
     if (isSubmitting) return
+    setIsSuccess(false)
     onClose()
   }
 

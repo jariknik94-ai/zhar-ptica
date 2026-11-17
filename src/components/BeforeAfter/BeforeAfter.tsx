@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import After from '../../assets/BeforeAfter/After1.png'
-import Before from '../../assets/BeforeAfter/Before1.png'
+import After from '../../assets/BeforeAfter/After1.webp'
+import Before from '../../assets/BeforeAfter/Before1.webp'
 import Reveal from '../Reveal/Reveal'
 import './BeforeAfter.scss'
 

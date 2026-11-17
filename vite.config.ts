@@ -8,6 +8,8 @@ export default defineConfig({
     react(),
     svgr(),
     ViteImageOptimizer({
+      // Фотографии уже оптимизированы; повторное сжатие ухудшит качество.
+      exclude: /(?:Before1|After1)(?:-[\w-]+)?\.webp$/,
       png: { quality: 80 },
       jpeg: { quality: 80 },
       webp: { quality: 80 },
