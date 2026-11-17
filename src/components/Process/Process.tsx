@@ -26,7 +26,7 @@ const PROCESS_STEPS = [
 
 function Process() {
   return (
-    <section className='process' id='process'>
+    <section className='process'>
       <div className='container'>
         <h2>Этапы процесса реставрации</h2>
 

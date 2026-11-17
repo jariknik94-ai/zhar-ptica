@@ -155,6 +155,10 @@ html {
   max-width: 100%;
 }
 
+#home, #services, #advantages, #process, #before-after, #reviews, #price, #contacts {
+  scroll-margin-top: 84px;
+}
+
 body,
 #root {
   overflow-x: hidden;

@@ -51,6 +51,7 @@ function Home() {
 
       <Navbar />
 
+      <main>
       {/* HERO */}
       <section id="home">
         <Hero onBookingClick={handleBookingOpen} />
@@ -92,6 +93,7 @@ function Home() {
       <section id="contacts">
         <Contacts />
       </section>
+      </main>
 
       <ScrollTopButton />
 

@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Navbar.scss'
 
 type NavbarType = 'main' | 'price' | 'politics'
 type Theme = 'dark' | 'light'
 
 function Navbar({ type = 'main' }: { type?: NavbarType }) {
-  const navigate = useNavigate()
-  const location = useLocation()
-
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState('home')
 
@@ -70,39 +67,6 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
     }
   }, [menuOpen])
 
-  // SCROLL FUNCTION WITH HEADER OFFSET
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id)
-    if (el) {
-      const navHeight = 84 // Высота шапки для отступа
-      const elementPosition = el.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - navHeight
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      })
-    }
-  }
-
-  const goHome = () => {
-    setMenuOpen(false)
-    navigate('/')
-  }
-
-  const goToSection = (id: string) => {
-    setMenuOpen(false)
-
-    if (location.pathname !== '/') {
-      navigate('/')
-      setTimeout(() => {
-        scrollTo(id)
-      }, 100)
-    } else {
-      scrollTo(id)
-    }
-  }
-
   // ACTIVE SCROLL SPY (Optimized)
   useEffect(() => {
     if (isPrice || isPolitics) return
@@ -151,12 +115,10 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
       <header className="navbar">
         <div className="container navbar-content" ref={navRef}>
           {/* LOGO */}
-          <div
+          <Link
             className="logo"
-            onClick={goHome}
-            style={{ cursor: 'pointer' }}
-            role="button"
-            tabIndex={0}
+            to="/"
+            onClick={() => setMenuOpen(false)}
           >
             <img
               className="logo-avatar"
@@ -166,85 +128,71 @@ function Navbar({ type = 'main' }: { type?: NavbarType }) {
               height="60"
             />
             Жар птица
-          </div>
+          </Link>
 
           {/* MAIN NAV */}
           {!isPrice && !isPolitics && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-              <a
+              <Link to="/#home"
                 className={active === 'home' ? 'active-link' : ''}
-                onClick={() => goToSection('home')}
+                onClick={() => setMenuOpen(false)}
               >
                 Главная
-              </a>
-              <a
+              </Link>
+              <Link to="/#services"
                 className={active === 'services' ? 'active-link' : ''}
-                onClick={() => goToSection('services')}
+                onClick={() => setMenuOpen(false)}
               >
                 Услуги
-              </a>
-              <a
+              </Link>
+              <Link to="/#advantages"
                 className={active === 'advantages' ? 'active-link' : ''}
-                onClick={() => goToSection('advantages')}
+                onClick={() => setMenuOpen(false)}
               >
                 Преимущества
-              </a>
-              <a
+              </Link>
+              <Link to="/#process"
                 className={active === 'process' ? 'active-link' : ''}
-                onClick={() => goToSection('process')}
+                onClick={() => setMenuOpen(false)}
               >
                 Процесс
-              </a>
-              <a
+              </Link>
+              <Link to="/#reviews"
                 className={active === 'reviews' ? 'active-link' : ''}
-                onClick={() => goToSection('reviews')}
+                onClick={() => setMenuOpen(false)}
               >
                 Отзывы
-              </a>
-              <a
+              </Link>
+              <Link to="/price"
                 className={active === 'price' ? 'active-link' : ''}
-                onClick={() => navigate('/price')}
+                onClick={() => setMenuOpen(false)}
               >
                 Прайс
-              </a>
-              <a
+              </Link>
+              <Link to="/#contacts"
                 className={active === 'contacts' ? 'active-link' : ''}
-                onClick={() => goToSection('contacts')}
+                onClick={() => setMenuOpen(false)}
               >
                 Контакты
-              </a>
+              </Link>
             </nav>
           )}
 
           {/* PRICE NAV */}
           {isPrice && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-              <a onClick={goHome}>Главная</a>
-              <a className="active-link">Прайс</a>
-              <a
-                onClick={() => {
-                  navigate('/')
-                  setTimeout(() => {
-                    scrollTo('contacts')
-                  }, 100)
-                }}
-              >
-                Контакты
-              </a>
+              <Link to="/" onClick={() => setMenuOpen(false)}>Главная</Link>
+              <Link to="/price" className="active-link" aria-current="page" onClick={() => setMenuOpen(false)}>Прайс</Link>
+              <Link to="/#contacts" onClick={() => setMenuOpen(false)}>Контакты</Link>
             </nav>
           )}
 
           {/* POLITICS NAV */}
           {isPolitics && (
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-              <a onClick={goHome}>Главная</a>
-              <a
-                className={active === 'price' ? 'active-link' : ''}
-                onClick={() => navigate('/price')}
-              >
-                Прайс
-              </a>
-              <a className="active-link">Политика</a>
+              <Link to="/" onClick={() => setMenuOpen(false)}>Главная</Link>
+              <Link to="/price" onClick={() => setMenuOpen(false)}>Прайс</Link>
+              <Link to="/politics" className="active-link" aria-current="page" onClick={() => setMenuOpen(false)}>Политика</Link>
             </nav>
           )}
 

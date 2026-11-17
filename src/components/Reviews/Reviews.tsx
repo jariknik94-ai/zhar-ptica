@@ -34,7 +34,7 @@ const REVIEWS_DATA = [
 
 function Reviews() {
   return (
-    <section className='reviews' id='reviews'>
+    <section className='reviews'>
       <div className='container'>
         <h2>Отзывы клиентов</h2>
 

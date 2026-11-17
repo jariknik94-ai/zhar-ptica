@@ -1,16 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './CookiePopup.scss'
 
 function CookiePopup() {
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const accepted = localStorage.getItem('cookiesAccepted')
-    if (!accepted) {
-      setVisible(true)
-    }
-  }, [])
+  const [visible, setVisible] = useState(() => !localStorage.getItem('cookiesAccepted'))
 
   const acceptCookies = () => {
     localStorage.setItem('cookiesAccepted', 'true')

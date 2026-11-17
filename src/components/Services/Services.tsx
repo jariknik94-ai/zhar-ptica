@@ -22,7 +22,7 @@ const SERVICES_DATA = [
 
 function Services() {
   return (
-    <section className='services' id='services'>
+    <section className='services'>
       <div className='container'>
         <h2>Наши услуги</h2>
 

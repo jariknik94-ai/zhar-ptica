@@ -5,7 +5,7 @@ import './Contacts.scss'
 
 function Contacts() {
   return (
-    <section className='contacts' id='contacts'>
+    <section className='contacts'>
       <div className='container'>
         <h2>Контакты</h2>
         <p className='contacts-subtitle'>Свяжитесь с нами любым удобным способом</p>
